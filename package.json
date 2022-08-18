@@ -1,0 +1,24 @@
+{
+  "name": "microservices-hkdigitals",
+  "version": "1.0.0",
+  "description": "Various business applications (case study here of the company hkdigitals) in microservice architecture. We find modules such as the creation of curriculum vitae, a cms (content management system), a web client that consumes the services offered by our API.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Emmanuel-Ghomsi/microservices-hkdigitals.git"
+  },
+  "keywords": [
+    "microservices",
+    "api",
+    "hkdigitals"
+  ],
+  "author": "Emmanuel Ghomsi Ghomsi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Emmanuel-Ghomsi/microservices-hkdigitals/issues"
+  },
+  "homepage": "https://github.com/Emmanuel-Ghomsi/microservices-hkdigitals#readme"
+}
