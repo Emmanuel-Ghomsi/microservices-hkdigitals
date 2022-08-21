@@ -12,9 +12,9 @@ module.exports = (app) => {
         email,
         password,
       });
-      return res.json(data);
+      return res.status(201).json(data);
     } catch (err) {
-      next(err);
+      res.status(err.statusCode.statusCode ).json({ error: err.statusCode.name });
     }
   });
 
@@ -24,9 +24,9 @@ module.exports = (app) => {
 
       const { data } = await UserSignInService.signIn({ email, password });
 
-      return res.json(data);
+      return res.status(200).json(data);
     } catch (err) {
-      next(err);
+      res.status(err.statusCode.statusCode ).json({ error: err.statusCode.name });
     }
   });
 
@@ -34,9 +34,9 @@ module.exports = (app) => {
     try {
       const { _id } = req.user;
       const { data } = await UserGetProfileService.getProfile({ _id });
-      return res.json(data);
+      return res.status(200).json(data);
     } catch (err) {
-      next(err);
+      res.status(err.statusCode.statusCode ).json({ error: err.statusCode.name });
     }
   });
 };

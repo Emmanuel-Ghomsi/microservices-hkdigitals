@@ -9,6 +9,7 @@ class FormationRepository {
     start_date,
     end_date,
     description,
+    address,
   }) {
     try {
       const formation = new FormationModel({
@@ -17,6 +18,7 @@ class FormationRepository {
         start_date,
         end_date,
         description,
+        address,
       });
       const formationResult = await formation.save();
       return formationResult;

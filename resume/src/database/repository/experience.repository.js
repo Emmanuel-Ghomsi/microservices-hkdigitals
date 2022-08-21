@@ -10,6 +10,7 @@ class ExperienceRepository {
     end_date,
     description,
     skills,
+    address,
   }) {
     try {
       const experience = new ExperienceModel({
@@ -19,6 +20,7 @@ class ExperienceRepository {
         end_date,
         description,
         skills,
+        address,
       });
       const experienceResult = await experience.save();
       return experienceResult;

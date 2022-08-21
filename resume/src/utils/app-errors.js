@@ -55,14 +55,8 @@ class BadRequestError extends AppError {
 
 //400
 class ValidationError extends AppError {
-  constructor(name, description = "Validation Error", errorStack) {
-    super(
-      name,
-      STATUS_CODES.BAD_REQUEST,
-      description,
-      true,
-      errorStack
-    );
+  constructor(name, description = "Validation Error") {
+    super(name, STATUS_CODES.BAD_REQUEST, description, true);
   }
 }
 

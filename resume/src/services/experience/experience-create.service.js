@@ -5,10 +5,17 @@ const { APIError, ValidationError } = require("../../utils/app-errors");
 // All Business logic will be here
 class ExperienceCreate {
   static async store(experienceInputs) {
-    const { role, company, start_date, end_date, description, skills } =
-      experienceInputs;
+    const {
+      role,
+      company,
+      start_date,
+      address,
+      end_date,
+      description,
+      skills,
+    } = experienceInputs;
 
-    if (!role || !company || !start_date || !description)
+    if (!role || !company || !start_date || !address || !description)
       throw new ValidationError("Empty require field");
 
     try {
@@ -19,6 +26,7 @@ class ExperienceCreate {
         end_date,
         description,
         skills,
+        address,
       });
       return FormateData({ experience: experience });
     } catch (err) {

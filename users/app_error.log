@@ -11,3 +11,5 @@
 {"level":"error","message":"Thu Aug 18 2022 00:15:26 GMT+0100 (heure normale d’Afrique de l’Ouest)-{\"name\":\"Data Not found\",\"statusCode\":{},\"isOperational\":true}","private":true}
 {"level":"error","message":"Thu Aug 18 2022 00:16:03 GMT+0100 (heure normale d’Afrique de l’Ouest)-{\"name\":\"Data Not found\",\"statusCode\":{},\"isOperational\":true}","private":true}
 {"level":"error","message":"Thu Aug 18 2022 00:57:58 GMT+0100 (heure normale d’Afrique de l’Ouest)-{\"name\":\"Data Not found\",\"statusCode\":{},\"isOperational\":true}","private":true}
+{"level":"error","message":"Sat Aug 20 2022 22:58:17 GMT+0100 (heure normale d’Afrique de l’Ouest)-{\"name\":\"Empty require field\",\"statusCode\":400,\"isOperational\":true}","private":true}
+{"level":"error","message":"Sun Aug 21 2022 07:24:35 GMT+0100 (heure normale d’Afrique de l’Ouest)-{\"name\":\"Data Not found\",\"statusCode\":{\"name\":\"User doesn't exist\",\"statusCode\":400,\"isOperational\":true},\"isOperational\":true}","private":true}

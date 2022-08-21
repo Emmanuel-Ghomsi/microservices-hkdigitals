@@ -12,6 +12,7 @@ const ExperienceSchema = new Schema(
       default: null,
     },
     description: String,
+    address: String,
     skills: [
       {
         type: String,

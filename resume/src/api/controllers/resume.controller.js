@@ -4,8 +4,15 @@ const UserAuth = require("../middlewares/auth");
 module.exports = (app) => {
   app.post("/create-resume", async (req, res, next) => {
     try {
-      const { formations, experiences, skills, hobbies, languages, summary, user } =
-        req.body;
+      const {
+        formations,
+        experiences,
+        skills,
+        hobbies,
+        languages,
+        summary,
+        user,
+      } = req.body;
       const { data } = await ResumeCreateService.store({
         formations,
         experiences,
@@ -17,7 +24,9 @@ module.exports = (app) => {
       });
       return res.json(data);
     } catch (err) {
-      next(err);
+      res
+        .status(err.statusCode.statusCode)
+        .json({ error: err.statusCode.name });
     }
   });
 };
