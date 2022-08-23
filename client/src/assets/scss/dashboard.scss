@@ -1,1 +1,118 @@
 @import "variables.scss";
+
+.page-content {
+  position: relative;
+  min-height: 100vh;
+  background-color: $bg-gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.form-resume {
+  position: absolute;
+  overflow: scroll;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+
+  @media screen and (max-width: 850px) {
+    width: 100%;
+  }
+
+  .block-group {
+    &:last-child {
+      margin-bottom: 50px;
+    }
+
+    label,
+    input,
+    select,
+    textarea,
+    .span-info {
+      font-size: 14px;
+      width: 100%;
+
+      &::placeholder {
+        color: rgba(137, 137, 137, 0.652);
+        font-weight: 500;
+      }
+    }
+    h4 {
+      font-size: 18px;
+    }
+    label,
+    .span-info {
+      font-weight: 500;
+    }
+  }
+}
+
+.form-group {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+}
+
+.w-45 {
+  width: 45%;
+}
+
+.form-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-control {
+  border: 0;
+  outline: none;
+  box-shadow: none;
+  display: block;
+  padding: 8px 15px;
+  border: 1px solid #eee;
+  width: 100%;
+  font-size: 13px;
+  border-radius: 10px;
+
+  &::-webkit-input-placeholder {
+    color: rgba(0, 0, 0, 0.652);
+    font-weight: 500;
+  }
+
+  &:focus {
+    border: 1px solid $blue;
+    font-size: 11px;
+    transition: border-color 0.6s ease-in-out, font-size 0.6s ease-out;
+  }
+}
+
+.live-resume {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  height: 100%;
+  background-color: $text-color;
+
+  @media screen and (max-width: 850px) {
+    display: none;
+  }
+}
+
+.ml-2 {
+  margin-left: 1rem;
+}
+
+a {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}

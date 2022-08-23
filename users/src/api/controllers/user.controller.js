@@ -14,7 +14,9 @@ module.exports = (app) => {
       });
       return res.status(201).json(data);
     } catch (err) {
-      res.status(err.statusCode.statusCode ).json({ error: err.statusCode.name });
+      res
+        .status(err.statusCode.statusCode)
+        .json({ error: err.statusCode.name });
     }
   });
 
@@ -26,17 +28,21 @@ module.exports = (app) => {
 
       return res.status(200).json(data);
     } catch (err) {
-      res.status(err.statusCode.statusCode ).json({ error: err.statusCode.name });
+      res
+        .status(err.statusCode.statusCode)
+        .json({ error: err.statusCode.name });
     }
   });
 
-  app.get("/profile", UserAuth, async (req, res, next) => {
+  app.get("/profile/:id", UserAuth, async (req, res, next) => {
     try {
-      const { _id } = req.user;
-      const { data } = await UserGetProfileService.getProfile({ _id });
+      const _id = req.params.id;
+      const { data } = await UserGetProfileService.getProfile(_id);
       return res.status(200).json(data);
     } catch (err) {
-      res.status(err.statusCode.statusCode ).json({ error: err.statusCode.name });
+      res
+        .status(err.statusCode.statusCode)
+        .json({ error: err.statusCode.name });
     }
   });
 };

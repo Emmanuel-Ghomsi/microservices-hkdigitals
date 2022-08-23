@@ -109,7 +109,12 @@
         border-radius: 10px;
 
         &::-webkit-input-placeholder {
-          color: rgba(0, 0, 0, 0.652);
+          color: rgba(137, 137, 137, 0.652);
+          font-weight: 500;
+        }
+
+        &::placeholder {
+          color: rgba(137, 137, 137, 0.652);
           font-weight: 500;
         }
 
@@ -209,7 +214,12 @@
           border-radius: 10px;
 
           &::-webkit-input-placeholder {
-            color: rgba(0, 0, 0, 0.652);
+            color: rgba(137, 137, 137, 0.652);
+            font-weight: 500;
+          }
+
+          &::placeholder {
+            color: rgba(137, 137, 137, 0.652);
             font-weight: 500;
           }
 

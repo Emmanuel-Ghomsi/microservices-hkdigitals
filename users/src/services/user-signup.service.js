@@ -38,7 +38,10 @@ class UserSignUpService {
 
       return FormateData({ id: newUser._id, token });
     } catch (err) {
-      throw new APIError("An error occurred, the user could not be created", err);
+      throw new APIError(
+        "An error occurred, the user could not be created",
+        err
+      );
     }
   }
 }

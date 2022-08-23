@@ -3,7 +3,11 @@ import Router from "./routes/Router";
 import { ToastContainer } from "react-toastify";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+
+// Actions
 import { loadAuth } from "./store/actions/authActions";
+import { loadUser } from "./store/actions/userActions";
+import { loadExperiences } from "./store/actions/experienceActions";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -12,6 +16,8 @@ function App() {
 
   useEffect(() => {
     dispatch(loadAuth());
+    dispatch(loadUser());
+    dispatch(loadExperiences());
   }, [dispatch]);
 
   return (

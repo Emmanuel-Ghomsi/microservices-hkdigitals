@@ -34,6 +34,8 @@ export default function Login() {
     e.preventDefault();
 
     dispatch(signIn(login));
+
+    e.stopPropagation();
   };
 
   return (
@@ -54,9 +56,10 @@ export default function Login() {
                   placeholder="Adresse mail"
                   name="email-login"
                   value={login.email}
-                  onChange={(e) =>
-                    setLogin({ ...login, email: e.target.value })
-                  }
+                  onChange={(e) => {
+                    e.stopPropagation();
+                    setLogin({ ...login, email: e.target.value });
+                  }}
                 />
                 <input
                   type="password"
@@ -64,9 +67,10 @@ export default function Login() {
                   placeholder="Mot de passe"
                   name="password-login"
                   value={login.password}
-                  onChange={(e) =>
-                    setLogin({ ...login, password: e.target.value })
-                  }
+                  onChange={(e) => {
+                    e.stopPropagation();
+                    setLogin({ ...login, password: e.target.value });
+                  }}
                 />
               </form>
               <button onClick={handleSubmitLogin} className="submit-btn">

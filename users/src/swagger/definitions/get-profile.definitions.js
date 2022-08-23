@@ -22,13 +22,13 @@
 
 /**
  * @swagger
- * /profile:
+ * /profile/{id}:
  *   get:
  *     summary: Get user information.
  *     tags: [Auth]
  *     parameters:
- *       - in: body
- *         name: user
+ *       - in: path
+ *         name: id
  *         required: true
  *         description: The user's id.
  *         example: 62fd77d55de94ce4a4d79d43

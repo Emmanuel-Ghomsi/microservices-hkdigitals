@@ -40,10 +40,14 @@ export default function Register() {
   const checkConfirmPassword = (e) => {
     if (register.password === e.target.value) setConfirmPassword(true);
     else setConfirmPassword(false);
+
+    e.stopPropagation();
   };
 
   // Set isSubscribed if the input is check
   const handleChangeSubscribed = (e) => {
+    e.stopPropagation();
+
     if (e.target.checked) {
       setIsSubscribed(true);
     } else {
@@ -63,6 +67,7 @@ export default function Register() {
       // Dispatch registration event with user informations
       dispatch(signUp(register));
     }
+    e.stopPropagation();
   };
 
   return (
@@ -81,9 +86,10 @@ export default function Register() {
                 className="input"
                 name="name"
                 value={register.name}
-                onChange={(e) =>
-                  setRegister({ ...register, name: e.target.value })
-                }
+                onChange={(e) => {
+                  e.stopPropagation();
+                  setRegister({ ...register, name: e.target.value });
+                }}
                 placeholder="Identifiant"
               />
               <input
@@ -92,9 +98,10 @@ export default function Register() {
                 className="input"
                 placeholder="Adresse mail"
                 value={register.email}
-                onChange={(e) =>
-                  setRegister({ ...register, email: e.target.value })
-                }
+                onChange={(e) => {
+                  e.stopPropagation();
+                  setRegister({ ...register, email: e.target.value });
+                }}
               />
               <input
                 type="password"
@@ -102,9 +109,10 @@ export default function Register() {
                 name="password"
                 placeholder="Mot de passe"
                 value={register.password}
-                onChange={(e) =>
-                  setRegister({ ...register, password: e.target.value })
-                }
+                onChange={(e) => {
+                  e.stopPropagation();
+                  setRegister({ ...register, password: e.target.value });
+                }}
               />
               <input
                 type="password"

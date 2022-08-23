@@ -1,0 +1,62 @@
+@import "variables.scss";
+
+.experiences-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.experiences-link {
+  color: #61dafb;
+}
+
+.experiences {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+  margin-top: 0.5em;
+
+  & li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: solid 2px #d0d0d0;
+    background: $white;
+    border-radius: 0.2em;
+    padding: 0.5em 0.8em 0.5em 0.5em;
+    margin-bottom: 1em;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  & p {
+    max-width: none;
+    font-weight: bold;
+    margin: 0;
+  }
+}
+
+.experiences-role {
+  overflow: hidden;
+  flex-shrink: 0;
+  color: $blue;
+  margin-right: 0.5em;
+}
+
+.experiences-actions,
+.experiences-content {
+  display: flex;
+}
+
+.mx-2 {
+  margin: 0 0.5em;
+}
+
+.text-danger {
+  color: $red;
+}
+
+.text-secondary {
+  color: $text-color;
+}

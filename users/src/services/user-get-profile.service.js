@@ -5,6 +5,8 @@ const { APIError, ValidationError } = require("../utils/app-errors");
 // All Business logic will be here
 class UserGetProfileService {
   static async getProfile(id) {
+    if (id === null) throw new ValidationError("Empty user id");
+
     try {
       const existingUser = await UserRepository.FindUserById(id);
 

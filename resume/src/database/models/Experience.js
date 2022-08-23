@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const ExperienceSchema = new Schema(
   {
+    user: Schema.Types.ObjectId,
     role: String,
     company: String,
     start_date: Date,
@@ -13,12 +14,6 @@ const ExperienceSchema = new Schema(
     },
     description: String,
     address: String,
-    skills: [
-      {
-        type: String,
-        default: null,
-      },
-    ],
     resume: {
       type: Schema.Types.ObjectId,
       ref: "Resume",
