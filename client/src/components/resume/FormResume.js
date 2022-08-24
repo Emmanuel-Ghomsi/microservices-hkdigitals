@@ -1,5 +1,6 @@
 import UserPersonnalInfoBlock from "./user/UserPersonnalInfoBlock";
 import ExperienceBlock from "./experience/ExperienceBlock";
+import FormationBlock from "./formation/FormationBlock";
 
 export default function FormResume(props) {
   return (
@@ -29,19 +30,21 @@ export default function FormResume(props) {
 
         <ExperienceBlock
           user_id={props.user._id}
+          experiences={props.experiences}
           setOpenModal={props.setOpenModal}
+          setModalType={props.setModalType}
           setExperiences={props.setExperiences}
           setExperience={props.setExperience}
-          experiences={props.experiences}
         />
 
-        <div className="block-group">
-          <h4>Formation(s)</h4>
-          <span className="span-info">
-            S'il y a lieu, indiquez vos plus recents résultats académiques et
-            les dates ici.
-          </span>
-        </div>
+        <FormationBlock
+          user_id={props.user._id}
+          formations={props.formations}
+          setOpenModal={props.setOpenModal}
+          setModalType={props.setModalType}
+          setFormations={props.setFormations}
+          setFormation={props.setFormation}
+        />
 
         <div className="block-group">
           <h4>Site web et lien sociaux</h4>

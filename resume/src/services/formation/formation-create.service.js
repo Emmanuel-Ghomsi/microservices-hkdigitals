@@ -5,20 +5,21 @@ const { APIError, ValidationError } = require("../../utils/app-errors");
 // All Business logic will be here
 class FormationCreate {
   static async store(formationInputs) {
-    const { degree, establishment, start_date, address, end_date, description } =
+    const { degree, establishment, start_date, address, end_date, description, user } =
       formationInputs;
 
-    if (!degree || !establishment || !address || !start_date)
+    if (!degree || !establishment || !start_date || !address || !description || !user)
       throw new ValidationError("Empty require field");
 
     try {
       const formation = await FormationRepository.CreateFormation({
+        user,
         degree,
         establishment,
         start_date,
         end_date,
         description,
-        address
+        address,
       });
       return FormateData({ formation: formation });
     } catch (err) {

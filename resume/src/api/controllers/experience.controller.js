@@ -28,8 +28,8 @@ module.exports = (app) => {
       return res.json(data);
     } catch (err) {
       res
-        .status(err.statusCode.statusCode)
-        .json({ error: err.statusCode.name });
+        .status(err.statusCode)
+        .json({ error: err.name });
     }
   });
 
@@ -60,8 +60,8 @@ module.exports = (app) => {
       return res.json(data);
     } catch (err) {
       res
-        .status(err.statusCode.statusCode)
-        .json({ error: err.statusCode.name });
+        .status(err.statusCode)
+        .json({ error: err.name });
     }
   });
 
@@ -73,8 +73,8 @@ module.exports = (app) => {
       return res.json(data);
     } catch (err) {
       res
-        .status(err.statusCode.statusCode)
-        .json({ error: err.statusCode.name });
+        .status(err.statusCode)
+        .json({ error: err.name });
     }
   });
 
@@ -85,8 +85,8 @@ module.exports = (app) => {
       return res.status(200).json(data);
     } catch (err) {
       res
-        .status(err.statusCode.statusCode)
-        .json({ error: err.statusCode.name });
+        .status(err.statusCode)
+        .json({ error: err.name });
     }
   });
 };

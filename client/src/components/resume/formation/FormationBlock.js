@@ -4,30 +4,30 @@ import { deleteExperience } from "../../../store/actions/experienceActions";
 
 import "../../../assets/scss/experience.scss";
 
-export default function ExperienceBlock(props) {
+export default function FormationBlock(props) {
   const dispatch = useDispatch(); // dispatch events
 
   function handleOnDragEnd(result) {
     if (!result.destination) return;
 
-    const items = Array.from(props.experiences);
+    const items = Array.from(props.formations);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
 
-    props.setExperiences(items);
+    props.setFormations(items);
   }
 
-  const handleDeleteExperience = (experience_id) => {
+  const handleDeleteFormation = (formation_id) => {
     // If user confirm the deletion
     if (
       window.confirm(
-        "Attention cette action est irréversible ! Voulez-vous réelement supprimer cette expérience ?"
+        "Attention cette action est irréversible ! Voulez-vous réelement supprimer cette formation ?"
       )
     ) {
       try {
-        dispatch(deleteExperience(experience_id, props.user_id));
-        props.setExperiences(
-          props.experiences.filter((item) => item._id !== experience_id)
+        dispatch(deleteExperience(formation_id, props.user_id));
+        props.setFormations(
+          props.formations.filter((item) => item._id !== formation_id)
         );
       } catch (error) {
         console.log(error.getMessage());
@@ -37,11 +37,10 @@ export default function ExperienceBlock(props) {
 
   return (
     <div className="block-group">
-      <h4>Expérience(s) professionnelle(s)</h4>
+      <h4>Formation(s)</h4>
       <span className="span-info">
-        Inclure vos 10 dernières années d'expérience pertinente et les dates
-        dans cette section. Dressez d'abord la liste de vos postes les plus
-        récent.
+        S'il y a lieu, indiquez vos plus recents résultats académiques et les
+        dates ici.
       </span>
       <div className="fw-semibold ml-2">
         <a
@@ -49,27 +48,27 @@ export default function ExperienceBlock(props) {
           onClick={(event) => {
             event.stopPropagation();
             props.setOpenModal(true);
-            props.setModalType("experience");
-            props.setExperience(null);
+            props.setModalType("formation");
+            props.setFormation(null);
           }}
         >
-          + Ajouter une expérience
+          + Ajouter une formation
         </a>
         <div className="experiences-header">
           <DragDropContext onDragEnd={handleOnDragEnd}>
-            <Droppable droppableId="experiences">
+            <Droppable droppableId="formations">
               {(provided) => (
                 <ul
                   className="experiences"
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                 >
-                  {props.experiences !== null
-                    ? props.experiences.map((experience, index) => {
+                  {props.formations !== null
+                    ? props.formations.map((formation, index) => {
                         return (
                           <Draggable
-                            key={experience._id}
-                            draggableId={experience._id}
+                            key={formation._id}
+                            draggableId={formation._id}
                             index={index}
                           >
                             {(provided) => (
@@ -89,9 +88,9 @@ export default function ExperienceBlock(props) {
                                 </svg>
                                 <div className="experiences-content">
                                   <div className="experiences-role">
-                                    <p>{experience.role}</p>
+                                    <p>{formation.degree}</p>
                                   </div>
-                                  <p>: {experience.company}</p>
+                                  <p>: {formation.establishment}</p>
                                 </div>
                                 <div className="experiences-actions">
                                   <a
@@ -99,8 +98,9 @@ export default function ExperienceBlock(props) {
                                     onClick={(event) => {
                                       event.stopPropagation();
                                       props.setOpenModal(true);
-                                      props.setModalType("experience");
-                                      props.setExperience(experience);
+                                      props.setModalType("formation");
+                                      props.setFormation(formation);
+                                      console.log(formation);
                                     }}
                                   >
                                     <i className="fas fa-edit text-secondary mx-2"></i>
@@ -109,7 +109,7 @@ export default function ExperienceBlock(props) {
                                     href="#"
                                     onClick={(event) => {
                                       event.stopPropagation();
-                                      handleDeleteExperience(experience._id);
+                                      handleDeleteFormation(formation._id);
                                     }}
                                   >
                                     <i className="fas fa-trash alt text-danger mx-2"></i>

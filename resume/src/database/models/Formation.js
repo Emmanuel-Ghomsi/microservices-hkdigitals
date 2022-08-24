@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const FormationSchema = new Schema(
   {
+    user: Schema.Types.ObjectId,
     degree: String,
     establishment: String,
     start_date: Date,

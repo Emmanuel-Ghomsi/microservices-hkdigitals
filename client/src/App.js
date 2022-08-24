@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { loadAuth } from "./store/actions/authActions";
 import { loadUser } from "./store/actions/userActions";
 import { loadExperiences } from "./store/actions/experienceActions";
+import { loadFormations } from "./store/actions/formationActions";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -18,6 +19,7 @@ function App() {
     dispatch(loadAuth());
     dispatch(loadUser());
     dispatch(loadExperiences());
+    dispatch(loadFormations());
   }, [dispatch]);
 
   return (

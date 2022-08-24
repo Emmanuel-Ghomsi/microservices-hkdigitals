@@ -3,34 +3,34 @@ import { useState } from "react";
 // From redux - dispatch event && get store state status
 import { useDispatch } from "react-redux";
 import {
-  addExperience,
-  editExperience,
-} from "../../../../store/actions/experienceActions";
+  addFormation,
+  editFormation,
+} from "../../../../store/actions/formationActions";
 
 import "../../../../assets/scss/modal.scss";
 
-export default function ModalExperience(props) {
+export default function ModalFormation(props) {
   const dispatch = useDispatch(); // dispatch events
-  const [createExperience, setCreateExperience] = useState(props.experience);
+  const [createFormation, setCreateFormation] = useState(props.formation);
 
-  const handleCreateExperience = (e) => {
+  const handleCreateFormation = (e) => {
     e.stopPropagation();
 
     try {
-      dispatch(addExperience(createExperience, props.user_id));
-      props.setExperiences((experiences) => [...experiences, createExperience]);
+      dispatch(addFormation(createFormation, props.user_id));
+      props.setFormations((formations) => [...formations, createFormation]);
     } catch (error) {
       console.log(error.getMessage());
     }
     props.closeOpenModal(false);
   };
 
-  const handleEditExperience = (e) => {
+  const handleEditFormation = (e) => {
     e.stopPropagation();
 
     try {
-      dispatch(editExperience(createExperience, props.user_id));
-      props.setExperiences((experiences) => [...experiences, createExperience]);
+      dispatch(editFormation(createFormation, props.user_id));
+      props.setFormations((formations) => [...formations, createFormation]);
     } catch (error) {
       console.log(error.getMessage());
     }
@@ -49,7 +49,7 @@ export default function ModalExperience(props) {
       <div className="centered">
         <div className="modal modal-md">
           <div className="modal-header">
-            <h5 className="heading">Ajouter une experience</h5>
+            <h5 className="heading">Ajouter une formation</h5>
           </div>
           <button
             className="close-btn"
@@ -67,25 +67,25 @@ export default function ModalExperience(props) {
                 <div className="form-group">
                   <div className="w-48">
                     <div className="form-content">
-                      <label htmlFor="role" className="form-label">
-                        Titre du Poste
+                      <label htmlFor="degree" className="form-label">
+                        Diplôme / Certification
                       </label>
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="par ex. Enseignant"
-                        id="role"
-                        name="role"
+                        placeholder="par ex. Licence en Sciences"
+                        id="degree"
+                        name="degree"
                         value={
-                          createExperience !== null
-                            ? createExperience.role ?? ""
+                          createFormation !== null
+                            ? createFormation.degree ?? ""
                             : ""
                         }
                         onChange={(e) => {
                           e.stopPropagation();
-                          setCreateExperience({
-                            ...createExperience,
-                            role: e.target.value,
+                          setCreateFormation({
+                            ...createFormation,
+                            degree: e.target.value,
                           });
                         }}
                       />
@@ -93,24 +93,24 @@ export default function ModalExperience(props) {
                   </div>
                   <div className="w-48">
                     <div className="form-content">
-                      <label htmlFor="company" className="form-label">
-                        Employeur
+                      <label htmlFor="establishment" className="form-label">
+                        Établissement d'obtention
                       </label>
                       <input
                         type="text"
                         className="form-control"
-                        id="company"
-                        name="company"
+                        id="establishment"
+                        name="establishment"
                         value={
-                          createExperience !== null
-                            ? createExperience.company ?? ""
+                          createFormation !== null
+                            ? createFormation.establishment ?? ""
                             : ""
                         }
                         onChange={(e) => {
                           e.stopPropagation();
-                          setCreateExperience({
-                            ...createExperience,
-                            company: e.target.value,
+                          setCreateFormation({
+                            ...createFormation,
+                            establishment: e.target.value,
                           });
                         }}
                       />
@@ -128,16 +128,16 @@ export default function ModalExperience(props) {
                           id="start_date"
                           name="start_date"
                           defaultValue={
-                            createExperience !== null
-                              ? createExperience.start_date != null
-                                ? createExperience.start_date.split("T")[0]
+                            createFormation !== null
+                              ? createFormation.start_date != null
+                                ? createFormation.start_date.split("T")[0]
                                 : ""
                               : ""
                           }
                           onChange={(e) => {
                             e.stopPropagation();
-                            setCreateExperience({
-                              ...createExperience,
+                            setCreateFormation({
+                              ...createFormation,
                               start_date: e.target.value,
                             });
                           }}
@@ -148,16 +148,16 @@ export default function ModalExperience(props) {
                           id="end_date"
                           name="end_date"
                           defaultValue={
-                            createExperience !== null
-                              ? createExperience.end_date != null
-                                ? createExperience.end_date.split("T")[0]
+                            createFormation !== null
+                              ? createFormation.end_date != null
+                                ? createFormation.end_date.split("T")[0]
                                 : ""
                               : ""
                           }
                           onChange={(e) => {
                             e.stopPropagation();
-                            setCreateExperience({
-                              ...createExperience,
+                            setCreateFormation({
+                              ...createFormation,
                               end_date: e.target.value,
                             });
                           }}
@@ -177,14 +177,14 @@ export default function ModalExperience(props) {
                         id="address"
                         name="address"
                         value={
-                          createExperience !== null
-                            ? createExperience.address ?? ""
+                          createFormation !== null
+                            ? createFormation.address ?? ""
                             : ""
                         }
                         onChange={(e) => {
                           e.stopPropagation();
-                          setCreateExperience({
-                            ...createExperience,
+                          setCreateFormation({
+                            ...createFormation,
                             address: e.target.value,
                           });
                         }}
@@ -206,14 +206,14 @@ export default function ModalExperience(props) {
                       placeholder="par ex. Création et mise en oeuvre de plans de leçon fondés sur les intérêts et les curiosités des enfants."
                       rows={5}
                       value={
-                        createExperience !== null
-                          ? createExperience.description ?? ""
+                        createFormation !== null
+                          ? createFormation.description ?? ""
                           : ""
                       }
                       onChange={(e) => {
                         e.stopPropagation();
-                        setCreateExperience({
-                          ...createExperience,
+                        setCreateFormation({
+                          ...createFormation,
                           description: e.target.value,
                         });
                       }}
@@ -226,18 +226,18 @@ export default function ModalExperience(props) {
 
           <div className="modal-actions">
             <div className="actions-container">
-              {createExperience !== null &&
-              createExperience._id !== undefined ? (
+              {createFormation !== null &&
+              createFormation._id !== undefined ? (
                 <button
                   className="btn btn-primary"
-                  onClick={handleEditExperience}
+                  onClick={handleEditFormation}
                 >
                   Modifier
                 </button>
               ) : (
                 <button
                   className="btn btn-primary"
-                  onClick={handleCreateExperience}
+                  onClick={handleCreateFormation}
                 >
                   Enregister
                 </button>

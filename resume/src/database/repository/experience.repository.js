@@ -65,7 +65,6 @@ class ExperienceRepository {
   }
 
   static async FindExperienceByIdAndDelete(id) {
-    console.log(id);
     try {
       return await ExperienceModel.findByIdAndDelete(id);
     } catch (err) {
