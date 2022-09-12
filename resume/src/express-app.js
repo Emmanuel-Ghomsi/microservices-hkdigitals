@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 
-const { resume, experience, formation } = require("./api");
+const { resume, experience, formation, skill, hobby, language } = require("./api");
 
 const HandleErrors = require("./utils/error-handler");
 
@@ -21,6 +21,9 @@ module.exports = async (app) => {
   resume(app);
   experience(app);
   formation(app);
+  skill(app);
+  hobby(app);
+  language(app);
 
   // error handling
   app.use(HandleErrors);

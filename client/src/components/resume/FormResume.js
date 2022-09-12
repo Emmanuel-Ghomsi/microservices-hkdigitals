@@ -1,8 +1,16 @@
 import UserPersonnalInfoBlock from "./user/UserPersonnalInfoBlock";
 import ExperienceBlock from "./experience/ExperienceBlock";
 import FormationBlock from "./formation/FormationBlock";
+import SocialBlock from "./social/SocialBlock";
+import SkillBlock from "./skill/SkillBlock";
+import LanguageBlock from "./language/LanguageBlock";
+import HobbyBlock from "./hobby/HobbyBlock";
+
+//import { useState } from "react";
 
 export default function FormResume(props) {
+  //const [resume, setResume] = useState(props.resume);
+
   return (
     <div className="form-resume">
       <div className="container">
@@ -23,6 +31,14 @@ export default function FormResume(props) {
                 name="summary"
                 placeholder="par ex. Professeur de science passionné avec plus de 8 ans d'expérience et un parcours professionnel de ..."
                 rows={5}
+                value={props.resume !== null ? props.resume.summary  ?? "" : ""}
+                onChange={(e) => {
+                  e.stopPropagation();
+                  props.setResume({
+                    ...props.resume,
+                    summary: e.target.value,
+                  });
+                }}
               ></textarea>
             </div>
           </div>
@@ -46,36 +62,41 @@ export default function FormResume(props) {
           setFormation={props.setFormation}
         />
 
-        <div className="block-group">
-          <h4>Site web et lien sociaux</h4>
-          <span className="span-info">
-            Vous pouvez ajouter des liens vers des sites web que les recruteurs
-            verront ! Cela peut être un lien vers votre Portfolio, votre profil
-            LinkedIn ou votre site web personnel.
-          </span>
-        </div>
+        <SocialBlock
+          user_id={props.user._id}
+          socials={props.socials}
+          setOpenModal={props.setOpenModal}
+          setModalType={props.setModalType}
+          setSocials={props.setSocials}
+          setSocial={props.setSocial}
+        />
 
-        <div className="block-group">
-          <h4>Compétences(s)</h4>
-          <span className="span-info">
-            Dressez la liste de vos compétences et de vos niveaux d'expériences
-            afin de visualiser vos forces et d'optimiser vos mots-clés.
-          </span>
-        </div>
+        <SkillBlock
+          user_id={props.user._id}
+          skills={props.skills}
+          setOpenModal={props.setOpenModal}
+          setModalType={props.setModalType}
+          setSkills={props.setSkills}
+          setSkill={props.setSkill}
+        />
 
-        <div className="block-group">
-          <h4>Loisir(s)</h4>
-          <span className="span-info">
-            Quelle(s) activité(s) pratiquez-vous ?
-          </span>
-        </div>
+        <HobbyBlock
+          user_id={props.user._id}
+          hobbies={props.hobbies}
+          setOpenModal={props.setOpenModal}
+          setModalType={props.setModalType}
+          setHobbies={props.setHobbies}
+          setHobby={props.setHobby}
+        />
 
-        <div className="block-group">
-          <h4>Langue(s)</h4>
-          <span className="span-info">
-            Quelle(s) est(sont) la(les) langue(s) que vous parlez ?
-          </span>
-        </div>
+        <LanguageBlock
+          user_id={props.user._id}
+          languages={props.languages}
+          setOpenModal={props.setOpenModal}
+          setModalType={props.setModalType}
+          setLanguages={props.setLanguages}
+          setLanguage={props.setLanguage}
+        />
       </div>
     </div>
   );

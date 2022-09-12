@@ -2,4 +2,5 @@
 module.exports = {
   databaseConnection: require("./connection"),
   UserRepository: require("./repository/user.repository"),
+  SocialRepository: require("./repository/social.repository"),
 };

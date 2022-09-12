@@ -20,7 +20,7 @@ export default function ModalFormation(props) {
       dispatch(addFormation(createFormation, props.user_id));
       props.setFormations((formations) => [...formations, createFormation]);
     } catch (error) {
-      console.log(error.getMessage());
+      console.log(error);
     }
     props.closeOpenModal(false);
   };
@@ -30,9 +30,14 @@ export default function ModalFormation(props) {
 
     try {
       dispatch(editFormation(createFormation, props.user_id));
-      props.setFormations((formations) => [...formations, createFormation]);
+      // Pour arranger l'affichage lors de la modification pour éviter de dupliquer la ligne
+      props.setFormations(
+        props.formations.map((item, index) =>
+          item.id === index ? { ...item, createFormation } : item
+        )
+      );
     } catch (error) {
-      console.log(error.getMessage());
+      console.log(error);
     }
     props.closeOpenModal(false);
   };

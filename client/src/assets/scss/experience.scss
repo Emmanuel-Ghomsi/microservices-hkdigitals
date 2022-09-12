@@ -9,7 +9,7 @@
   color: #61dafb;
 }
 
-.experiences {
+.experiences, .socials, .skills {
   list-style: none;
   padding-left: 0;
   margin-bottom: 0;
@@ -35,6 +35,12 @@
     font-weight: bold;
     margin: 0;
   }
+}
+
+.socials li, .skills li {
+  background: $white;
+  border: none;
+  border-bottom: solid 2px #d0d0d0;
 }
 
 .experiences-role {

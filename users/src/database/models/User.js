@@ -21,11 +21,6 @@ const UserSchema = new Schema(
       type: String,
       default: null,
     },
-    socials: {
-      type: Map,
-      of: String,
-      default: null,
-    },
   },
   {
     toJSON: {

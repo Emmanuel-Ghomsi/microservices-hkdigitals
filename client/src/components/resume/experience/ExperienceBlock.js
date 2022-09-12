@@ -30,7 +30,7 @@ export default function ExperienceBlock(props) {
           props.experiences.filter((item) => item._id !== experience_id)
         );
       } catch (error) {
-        console.log(error.getMessage());
+        console.log(error);
       }
     }
   };

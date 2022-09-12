@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 
-const { user } = require("./api");
+const { user, social } = require("./api");
 
 const HandleErrors = require("./utils/error-handler");
 
@@ -19,6 +19,7 @@ module.exports = async (app) => {
 
   //api
   user(app);
+  social(app);
 
   // error handling
   app.use(HandleErrors);

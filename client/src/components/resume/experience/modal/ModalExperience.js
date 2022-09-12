@@ -20,7 +20,7 @@ export default function ModalExperience(props) {
       dispatch(addExperience(createExperience, props.user_id));
       props.setExperiences((experiences) => [...experiences, createExperience]);
     } catch (error) {
-      console.log(error.getMessage());
+      console.log(error);
     }
     props.closeOpenModal(false);
   };
@@ -30,9 +30,14 @@ export default function ModalExperience(props) {
 
     try {
       dispatch(editExperience(createExperience, props.user_id));
-      props.setExperiences((experiences) => [...experiences, createExperience]);
+      // Pour arranger l'affichage lors de la modification pour éviter de dupliquer la ligne
+      props.setExperiences(
+        props.experiences.map((item, index) =>
+          item.id === index ? { ...item, createExperience } : item
+        )
+      );
     } catch (error) {
-      console.log(error.getMessage());
+      console.log(error);
     }
     props.closeOpenModal(false);
   };

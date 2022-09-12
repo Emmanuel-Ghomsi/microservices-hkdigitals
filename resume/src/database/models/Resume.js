@@ -17,12 +17,24 @@ const ResumeSchema = new Schema(
         ref: "Experience",
       },
     ],
-    skills: [String],
-    hobbies: [String],
-    languages: {
-      type: Map,
-      of: String,
-    },
+    skills: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Skill",
+      },
+    ],
+    hobbies: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Hobby",
+      },
+    ],
+    languages: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Language",
+      },
+    ],
     summary: String,
   },
   {

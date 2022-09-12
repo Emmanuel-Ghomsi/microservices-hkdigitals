@@ -9,6 +9,11 @@ import { loadAuth } from "./store/actions/authActions";
 import { loadUser } from "./store/actions/userActions";
 import { loadExperiences } from "./store/actions/experienceActions";
 import { loadFormations } from "./store/actions/formationActions";
+import { loadSocials } from "./store/actions/socialActions";
+import { loadSkills } from "./store/actions/skillActions";
+import { loadHobbies } from "./store/actions/hobbyActions";
+import { loadLanguages } from "./store/actions/languageActions";
+import { loadResume } from "./store/actions/resumeActions";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -20,6 +25,11 @@ function App() {
     dispatch(loadUser());
     dispatch(loadExperiences());
     dispatch(loadFormations());
+    dispatch(loadSocials());
+    dispatch(loadSkills());
+    dispatch(loadHobbies());
+    dispatch(loadLanguages());
+    dispatch(loadResume());
   }, [dispatch]);
 
   return (

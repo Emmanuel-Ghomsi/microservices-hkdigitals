@@ -30,7 +30,7 @@ export default function FormationBlock(props) {
           props.formations.filter((item) => item._id !== formation_id)
         );
       } catch (error) {
-        console.log(error.getMessage());
+        console.log(error);
       }
     }
   };
@@ -100,7 +100,6 @@ export default function FormationBlock(props) {
                                       props.setOpenModal(true);
                                       props.setModalType("formation");
                                       props.setFormation(formation);
-                                      console.log(formation);
                                     }}
                                   >
                                     <i className="fas fa-edit text-secondary mx-2"></i>

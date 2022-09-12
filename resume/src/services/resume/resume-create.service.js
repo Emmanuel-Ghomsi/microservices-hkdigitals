@@ -20,7 +20,7 @@ class ResumeCreate {
       experiences.length === 0 ||
       skills.length === 0 ||
       hobbies.length === 0 ||
-      languages.size === 0 ||
+      languages.length === 0 ||
       !summary ||
       !user
     )
