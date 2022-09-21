@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 // From redux - dispatch event && get store state status
@@ -33,11 +33,16 @@ import {
 } from "../store/actions/avatarActions";
 import { logOut } from "../store/actions/authActions";
 
+import { useReactToPrint } from "react-to-print";
+
 import "../assets/scss/dashboard.scss";
 
 export default function Dashboard() {
   const navigate = useNavigate(); // redirect and navigate
   const dispatch = useDispatch(); // dispatch events
+
+  // reference for download pdf
+  const componentRef = useRef();
 
   const auth = useSelector((state) => state.auth); // get store state status from auth
   const userInState = useSelector((state) => state.user.user); // get store state status from users
@@ -168,20 +173,32 @@ export default function Dashboard() {
     dispatch(logOut());
   };
 
-  const downloadDocument = (e) => {
-    // TODO print the resume content zone
+  /**
+   * With JavaScript
+   *
+   * const zone = document.querySelector(".resume").innerHTML;
+   * const originalContents = document.body.innerHTML;
+   * document.body.innerHTML = zone;
+   * window.print();
+   * document.body.innerHTML = originalContents;
+   */
 
+  const downloadDocument = (e) => {
     e.preventDefault();
     e.stopPropagation();
 
-    const zone = document.querySelector(".resume").innerHTML;
-    const originalContents = document.body.innerHTML;
-
-    document.body.innerHTML = zone;
-    window.print();
-
-    document.body.innerHTML = originalContents;
+    const height = document.querySelector(".resume").clientHeight;
+    if (height < 1120)
+      document.querySelector(".resume").style.height = "1120px";
+    handleDownload();
+    document.querySelector(".resume").style.height = `${height}px`;
   };
+
+  const handleDownload = useReactToPrint({
+    content: () => componentRef.current,
+    documentTitle: user.name + "-cv",
+    onAfterPrint: () => console.log("Success"),
+  });
 
   return (
     <div className="body-wrap">
@@ -219,33 +236,34 @@ export default function Dashboard() {
 
             <div className="phone-visible btn-group">
               <button
-                className="btn btn-primary"
+                className="btn btn-circle btn-primary"
                 onClick={saveDocument}
                 title="Enregister le document"
               >
                 <i className="fa fa-save"></i>
               </button>
               <button
-                className="btn btn-info"
+                className="btn btn-circle btn-info"
                 title="Telecharger le document"
                 onClick={downloadDocument}
               >
                 <i className="fa fa-download"></i>
               </button>
               <button
-                className="btn btn-danger"
+                className="btn btn-circle btn-danger"
                 title="Se deconnecter"
                 onClick={logout}
               >
-                <i className="fa fa-sign-out-alt"></i>
+                <i className="fa fa-sign-out"></i>
               </button>
             </div>
           </div>
         </div>
 
         <div className="live-resume">
-          <div className="container">
+          <div className="container my-2">
             <Resume
+              componentRef={componentRef}
               user={user}
               experiences={experiences}
               formations={formations}
@@ -259,25 +277,25 @@ export default function Dashboard() {
             />
             <div className="btn-group">
               <button
-                className="btn btn-primary"
+                className="btn btn-circle btn-primary"
                 onClick={saveDocument}
                 title="Enregister le document"
               >
                 <i className="fa fa-save"></i>
               </button>
               <button
-                className="btn btn-info"
+                className="btn btn-circle btn-info"
                 title="Telecharger le document"
                 onClick={downloadDocument}
               >
                 <i className="fa fa-download"></i>
               </button>
               <button
-                className="btn btn-danger"
+                className="btn btn-circle btn-danger"
                 title="Se deconnecter"
                 onClick={logout}
               >
-                <i className="fa fa-sign-out-alt"></i>
+                <i className="fa fa-sign-out"></i>
               </button>
             </div>
           </div>

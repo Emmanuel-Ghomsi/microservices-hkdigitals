@@ -6,7 +6,7 @@ import "moment/locale/fr";
 
 export default function Resume(props) {
   return (
-    <div className="resume">
+    <div className="resume" ref={props.componentRef}>
       <div className="left-content">
         <img
           className="img-responsive"

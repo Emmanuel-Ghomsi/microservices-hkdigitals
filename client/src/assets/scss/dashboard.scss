@@ -16,6 +16,15 @@
   margin-bottom: 2em;
 }
 
+.my-2 {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.btn-circle {
+  border-radius: 50%;
+}
+
 .btn-info {
   background-color: palevioletred;
   color: $white;
@@ -62,11 +71,17 @@
   }
 }
 
-.form-group,
-.btn-group {
+.form-group {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  margin: 15px 0;
+}
+
+.btn-group {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
   margin: 15px 0;
 }
 
