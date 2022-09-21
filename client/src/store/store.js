@@ -8,6 +8,7 @@ import resumeReducer from "./reducers/resumeReducer";
 import skillReducer from "./reducers/skillReducer";
 import socialReducer from "./reducers/socialReducer";
 import userReducer from "./reducers/userReducer";
+import avatarReducer from "./reducers/avatarReducer";
 
 export default configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export default configureStore({
     hobby: hobbyReducer,
     language: languageReducer,
     resume: resumeReducer,
+    image: avatarReducer,
   },
   middleware: [
     ...getDefaultMiddleware({

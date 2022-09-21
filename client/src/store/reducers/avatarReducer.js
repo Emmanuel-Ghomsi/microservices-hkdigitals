@@ -3,29 +3,26 @@ import { toast } from "react-toastify";
 
 // Initial state
 const initialState = {
-  user: null,
+  image: null,
 };
 
-const userReducer = (state = initialState, action) => {
+const avatarReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "USER_LOADED":
-    case "GET_USER":
-    case "EDIT_USER":
+    case "GET_IMAGE":
+    case "IMAGE_LOADED":
       // return new state
       return {
         ...initialState,
-        user: action.user,
+        image: action.image,
       };
-    case "LOGOUT":
-      // Remove token in local storage
-      localStorage.removeItem("token");
+    case "EMPTY_IMAGE":
       // return empty state
       return {
-        user: null,
+        image: null,
       };
     default:
       return state;
   }
 };
 
-export default userReducer;
+export default avatarReducer;

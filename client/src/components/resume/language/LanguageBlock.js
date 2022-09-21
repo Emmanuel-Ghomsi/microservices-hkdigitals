@@ -25,7 +25,7 @@ export default function LanguageBlock(props) {
   };
 
   return (
-    <div className="block-group">
+    <div className="block-group mb-2">
       <h4>Langue(s)</h4>
       <span className="span-info">
         Quelle(s) est(sont) la(les) langue(s) que vous parlez ?

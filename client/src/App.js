@@ -14,6 +14,7 @@ import { loadSkills } from "./store/actions/skillActions";
 import { loadHobbies } from "./store/actions/hobbyActions";
 import { loadLanguages } from "./store/actions/languageActions";
 import { loadResume } from "./store/actions/resumeActions";
+import { loadImage } from "./store/actions/avatarActions";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -30,6 +31,7 @@ function App() {
     dispatch(loadHobbies());
     dispatch(loadLanguages());
     dispatch(loadResume());
+    dispatch(loadImage());
   }, [dispatch]);
 
   return (

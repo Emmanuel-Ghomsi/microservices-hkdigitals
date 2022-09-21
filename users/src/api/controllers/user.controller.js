@@ -1,5 +1,6 @@
 const UserSignUpService = require("../../services/user-signup.service");
 const UserSignInService = require("../../services/user-signin.service");
+const UserEditService = require("../../services/user-edit.service");
 const UserGetProfileService = require("../../services/user-get-profile.service");
 const UserAuth = require("../middlewares/auth");
 
@@ -43,6 +44,25 @@ module.exports = (app) => {
       res
         .status(err.statusCode.statusCode)
         .json({ error: err.statusCode.name });
+    }
+  });
+
+  app.put("/edit-user/:id", UserAuth, async (req, res, next) => {
+    try {
+      const { name, job, address, phone } = req.body;
+
+      const _id = req.params.id;
+
+      const { data } = await UserEditService.update({
+        id: _id,
+        name,
+        job,
+        address,
+        phone,
+      });
+      return res.json(data);
+    } catch (err) {
+      res.status(err.statusCode).json({ error: err.name });
     }
   });
 };

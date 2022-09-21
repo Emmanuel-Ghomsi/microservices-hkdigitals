@@ -12,6 +12,20 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.mb-2 {
+  margin-bottom: 2em;
+}
+
+.btn-info {
+  background-color: palevioletred;
+  color: $white;
+
+  &:hover {
+    transition: all 0.3s ease;
+    background-color: darken(palevioletred, 20);
+  }
+}
+
 .form-resume {
   position: absolute;
   overflow: scroll;
@@ -25,10 +39,6 @@
   }
 
   .block-group {
-    &:last-child {
-      margin-bottom: 50px;
-    }
-
     label,
     input,
     select,
@@ -52,7 +62,8 @@
   }
 }
 
-.form-group {
+.form-group,
+.btn-group {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -94,6 +105,7 @@
 
 .live-resume {
   position: fixed;
+  overflow: scroll;
   right: 0;
   bottom: 0;
   width: 50%;
@@ -114,5 +126,17 @@ a {
 
   &:hover {
     text-decoration: none;
+  }
+}
+
+.phone-visible {
+  display: none;
+
+  @media screen and (max-width: 850px) {
+    display: flex;
+
+    .btn {
+      margin: 0 10px;
+    }
   }
 }

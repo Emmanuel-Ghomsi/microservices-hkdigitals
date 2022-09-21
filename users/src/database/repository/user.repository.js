@@ -35,6 +35,19 @@ class UserRepository {
     }
   }
 
+  static async FindUserByIdAndUpdate(id, options) {
+    try {
+      const existingUser = await UserModel.findByIdAndUpdate(id, options);
+      return existingUser;
+    } catch (err) {
+      throw APIError(
+        "API Error",
+        STATUS_CODES.INTERNAL_ERROR,
+        "Unable to Find and Update user"
+      );
+    }
+  }
+
   static async FindUserById(id) {
     try {
       const existingUser = await UserModel.findById(id);

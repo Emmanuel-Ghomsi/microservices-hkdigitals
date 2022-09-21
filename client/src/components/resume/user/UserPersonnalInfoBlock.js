@@ -6,6 +6,20 @@ import { useDispatch } from "react-redux";
 export default function UserPersonnalInfoBlock(props) {
   const dispatch = useDispatch(); // dispatch events
 
+  // Change the avatar and setup the preset image
+  const handleChangeAvatar = (e) => {
+    const imageUrl = URL.createObjectURL(e.target.files[0]);
+
+    // To show preset image
+    props.setPresetImg(imageUrl);
+
+    props.setAvatarFinal({
+      file: e.target.files[0],
+      type: "avatar",
+      _id: null,
+    });
+  };
+
   return (
     <div className="block-group">
       <h4>Renseignements personnels</h4>
@@ -39,6 +53,11 @@ export default function UserPersonnalInfoBlock(props) {
               className="form-control"
               id="avatar"
               name="avatar"
+              accept=".jpg, .png, .gif, .jpeg"
+              onChange={(e) => {
+                e.stopPropagation();
+                handleChangeAvatar(e);
+              }}
             />
           </div>
         </div>
@@ -73,6 +92,7 @@ export default function UserPersonnalInfoBlock(props) {
               placeholder="par ex. cv@example.com"
               id="email"
               name="email"
+              disabled
               value={props.user.email ?? ""}
               onChange={(e) => {
                 e.stopPropagation();

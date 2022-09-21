@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 // From redux - dispatch event && get store state status
 import { useDispatch } from "react-redux";
@@ -9,9 +9,14 @@ import {
 
 import "../../../../assets/scss/modal.scss";
 
+// Editor
+import { Editor } from "@tinymce/tinymce-react";
+
 export default function ModalExperience(props) {
   const dispatch = useDispatch(); // dispatch events
   const [createExperience, setCreateExperience] = useState(props.experience);
+
+  const editorRef = useRef(null);
 
   const handleCreateExperience = (e) => {
     e.stopPropagation();
@@ -203,26 +208,79 @@ export default function ModalExperience(props) {
                       Mentionnez plus de 200 caractéristiques pour augmenter les
                       chances d'entretien
                     </label>
-                    <textarea
-                      type="text"
-                      className="form-control"
-                      id="description"
-                      name="description"
+                    <input
+                      id="my-file"
+                      type="file"
+                      name="my-file"
+                      style={{ display: "none" }}
+                    />
+                    <Editor
+                      apiKey="u2cpycvgufhmuz5rij4htoelepggzmztfwk6g4o6vzho6qjd"
                       placeholder="par ex. Création et mise en oeuvre de plans de leçon fondés sur les intérêts et les curiosités des enfants."
-                      rows={5}
-                      value={
+                      onInit={(evt, editor) => (editorRef.current = editor)}
+                      defaultValue={
                         createExperience !== null
                           ? createExperience.description ?? ""
                           : ""
                       }
+                      init={{
+                        height: 500,
+                        menubar: false,
+                        plugins: [
+                          "advlist",
+                          "autolink",
+                          "lists",
+                          "link",
+                          "image",
+                          "charmap",
+                          "preview",
+                          "anchor",
+                          "searchreplace",
+                          "visualblocks",
+                          "code",
+                          "fullscreen",
+                          "insertdatetime",
+                          "media",
+                          "table",
+                          "help",
+                          "wordcount",
+                        ],
+                        toolbar:
+                          "undo redo | blocks | " +
+                          "bold italic backcolor | alignleft aligncenter " +
+                          "alignright alignjustify | bullist numlist outdent indent | " +
+                          "removeformat | link image | code | help",
+                        image_title: true,
+                        automatic_uploads: true,
+                        file_picker_types: "image media",
+                        file_picker_callback: function (callback, value, meta) {
+                          if (meta.filetype == "image") {
+                            var input = document.getElementById("my-file");
+                            input.click();
+                            input.onchange = function () {
+                              var file = input.files[0];
+                              var reader = new FileReader();
+                              reader.onload = function (e) {
+                                callback(e.target.result, {
+                                  alt: file.name,
+                                });
+                              };
+                              reader.readAsDataURL(file);
+                            };
+                          }
+                        },
+                        paste_data_images: true,
+                        content_style:
+                          "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+                      }}
                       onChange={(e) => {
                         e.stopPropagation();
                         setCreateExperience({
                           ...createExperience,
-                          description: e.target.value,
+                          description: editorRef.current.getContent(),
                         });
                       }}
-                    ></textarea>
+                    />
                   </div>
                 </div>
               </div>

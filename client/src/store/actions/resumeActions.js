@@ -85,7 +85,7 @@ export const addResume = (data, user_id) => {
   };
 };
 
-export const editSkill = (data, user_id) => {
+export const editResume = (resumeId, data, user_id) => {
   return (dispatch, getState) => {
     const token = getState().auth.token; // get the token from store state
 
@@ -98,20 +98,20 @@ export const editSkill = (data, user_id) => {
 
     axios
       .put(
-        `${APP_URL_RESUME}/edit-resume/${data.resume._id}`,
+        `${APP_URL_RESUME}/edit-resume/${resumeId}`,
         {
           formations: data.formations,
           experiences: data.experiences,
           skills: data.skills,
           hobbies: data.hobbies,
           languages: data.languages,
-          summary: data.resume.summary,
+          summary: data.summary,
           user: user_id,
         },
         config
       )
       .then((res) => {
-        toast.success("Resume updated successfully!", {
+        toast.success("Resume updaded successfully!", {
           position: toast.POSITION.TOP_RIGHT,
         });
 
@@ -131,7 +131,7 @@ export const editSkill = (data, user_id) => {
   };
 };
 
-export const deleteSkill = (resume_id, user_id) => {
+export const deleteResume = (resume_id, user_id) => {
   return (dispatch, getState) => {
     const token = getState().auth.token; // get the token from store state
 

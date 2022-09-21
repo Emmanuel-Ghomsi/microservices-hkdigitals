@@ -12,9 +12,13 @@ export default function FormResume(props) {
   //const [resume, setResume] = useState(props.resume);
 
   return (
-    <div className="form-resume">
-      <div className="container">
-        <UserPersonnalInfoBlock user={props.user} setUser={props.setUser} />
+    <>
+        <UserPersonnalInfoBlock
+          user={props.user}
+          setUser={props.setUser}
+          setPresetImg={props.setPresetImg}
+          setAvatarFinal={props.setAvatarFinal}
+        />
 
         <div className="block-group">
           <h4>Résumé professionnel</h4>
@@ -31,7 +35,7 @@ export default function FormResume(props) {
                 name="summary"
                 placeholder="par ex. Professeur de science passionné avec plus de 8 ans d'expérience et un parcours professionnel de ..."
                 rows={5}
-                value={props.resume !== null ? props.resume.summary  ?? "" : ""}
+                value={props.resume !== null ? props.resume.summary ?? "" : ""}
                 onChange={(e) => {
                   e.stopPropagation();
                   props.setResume({
@@ -97,7 +101,6 @@ export default function FormResume(props) {
           setLanguages={props.setLanguages}
           setLanguage={props.setLanguage}
         />
-      </div>
-    </div>
+      </>
   );
 }

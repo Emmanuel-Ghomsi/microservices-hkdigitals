@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/Emmanuel-Ghomsi/microservices-hkdigitals/issues"
   },
-  "homepage": "https://github.com/Emmanuel-Ghomsi/microservices-hkdigitals#readme"
+  "homepage": "https://github.com/Emmanuel-Ghomsi/microservices-hkdigitals#readme",
+  "dependencies": {
+    "@tinymce/tinymce-react": "^4.2.0"
+  }
 }

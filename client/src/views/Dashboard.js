@@ -14,14 +14,24 @@ import ModalHobby from "../components/resume/hobby/modal/ModalHobby";
 import Resume from "../components/resume/Resume";
 
 // Actions
-import { getUser } from "../store/actions/userActions";
+import { editUser, getUser } from "../store/actions/userActions";
 import { getExperiencesByUser } from "../store/actions/experienceActions";
 import { getFormationsByUser } from "../store/actions/formationActions";
 import { getSocialsByUser } from "../store/actions/socialActions";
 import { getSkillsByUser } from "../store/actions/skillActions";
 import { getLanguagesByUser } from "../store/actions/languageActions";
 import { getHobbiesByUser } from "../store/actions/hobbyActions";
-import { getResumeByUser } from "../store/actions/resumeActions";
+import {
+  addResume,
+  editResume,
+  getResumeByUser,
+} from "../store/actions/resumeActions";
+import {
+  getImageById,
+  addImage,
+  editImage,
+} from "../store/actions/avatarActions";
+import { logOut } from "../store/actions/authActions";
 
 import "../assets/scss/dashboard.scss";
 
@@ -40,6 +50,7 @@ export default function Dashboard() {
   const languagesInState = useSelector((state) => state.language.languages); // get store state status from languages
   const hobbiesInState = useSelector((state) => state.hobby.hobbies); // get store state status from hobbies
   const resumeInState = useSelector((state) => state.resume.resume); // get store state status from resume
+  const avatarInState = useSelector((state) => state.image.image); // get store state status from avatar
 
   const [user, setUser] = useState({});
   const [experiences, setExperiences] = useState([]);
@@ -57,6 +68,9 @@ export default function Dashboard() {
   const [resume, setResume] = useState(null);
   const [openModal, setOpenModal] = useState(false); // open and close modals
   const [modalType, setModalType] = useState(""); // open and close modals
+  const [avatarFinal, setAvatarFinal] = useState(null); // the Final avatar to send to cloudinary server
+  const [avatar, setAvatar] = useState(null); // the avatar
+  const [presetImg, setPresetImg] = useState(""); // preset image
 
   // Before mount, mount and update component
   useEffect(() => {
@@ -100,6 +114,10 @@ export default function Dashboard() {
       if (user._id && resumeInState === null)
         dispatch(getResumeByUser(user._id));
       else setResume(resumeInState);
+
+      // Get Avatar
+      if (user._id && avatarInState === null) dispatch(getImageById(user._id));
+      else setAvatar(avatarInState);
     }
   }, [
     auth,
@@ -111,37 +129,119 @@ export default function Dashboard() {
     languagesInState,
     hobbiesInState,
     resumeInState,
+    avatarInState,
   ]);
+
+  const saveDocument = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // sauvegarder les infos de l'utilisateur avant d'enregistrer le document
+    dispatch(editUser(user));
+
+    // sauvegarder les infos de l'avatar avant d'enregistrer le document
+    if (avatarFinal != null) {
+      if (avatar._id == undefined) dispatch(addImage(avatarFinal, user._id));
+      else dispatch(editImage(avatar._id, avatarFinal, user._id));
+    }
+
+    const data = {
+      formations: formations,
+      experiences: experiences,
+      skills: skills,
+      hobbies: hobbies,
+      languages: languages,
+      summary: resume.summary,
+    };
+
+    if (resume._id == undefined) dispatch(addResume(data, user._id));
+    else dispatch(editResume(resume._id, data, user._id));
+
+    // utile pour récupérer les innformations de l'utilisateur après enregistrement
+    dispatch(getUser());
+  };
+
+  const logout = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    dispatch(logOut());
+  };
+
+  const downloadDocument = (e) => {
+    // TODO print the resume content zone
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    const zone = document.querySelector(".resume").innerHTML;
+    const originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = zone;
+    window.print();
+
+    document.body.innerHTML = originalContents;
+  };
 
   return (
     <div className="body-wrap">
       <div className="page-content">
-        <FormResume
-          user={user}
-          setUser={setUser}
-          experiences={experiences}
-          setExperiences={setExperiences}
-          setExperience={setExperience}
-          formations={formations}
-          setFormations={setFormations}
-          setFormation={setFormation}
-          socials={socials}
-          setSocials={setSocials}
-          setSocial={setSocial}
-          skills={skills}
-          setSkills={setSkills}
-          setSkill={setSkill}
-          hobbies={hobbies}
-          setHobbies={setHobbies}
-          setHobby={setHobby}
-          languages={languages}
-          resume={resume}
-          setResume={setResume}
-          setLanguages={setLanguages}
-          setLanguage={setLanguage}
-          setOpenModal={setOpenModal}
-          setModalType={setModalType}
-        />
+        <div className="form-resume">
+          <div className="container">
+            <FormResume
+              user={user}
+              setUser={setUser}
+              experiences={experiences}
+              setExperiences={setExperiences}
+              setExperience={setExperience}
+              formations={formations}
+              setFormations={setFormations}
+              setFormation={setFormation}
+              socials={socials}
+              setSocials={setSocials}
+              setSocial={setSocial}
+              skills={skills}
+              setSkills={setSkills}
+              setSkill={setSkill}
+              hobbies={hobbies}
+              setHobbies={setHobbies}
+              setHobby={setHobby}
+              languages={languages}
+              resume={resume}
+              setResume={setResume}
+              setLanguages={setLanguages}
+              setLanguage={setLanguage}
+              setOpenModal={setOpenModal}
+              setModalType={setModalType}
+              setPresetImg={setPresetImg}
+              setAvatarFinal={setAvatarFinal}
+            />
+
+            <div className="phone-visible btn-group">
+              <button
+                className="btn btn-primary"
+                onClick={saveDocument}
+                title="Enregister le document"
+              >
+                <i className="fa fa-save"></i>
+              </button>
+              <button
+                className="btn btn-info"
+                title="Telecharger le document"
+                onClick={downloadDocument}
+              >
+                <i className="fa fa-download"></i>
+              </button>
+              <button
+                className="btn btn-danger"
+                title="Se deconnecter"
+                onClick={logout}
+              >
+                <i className="fa fa-sign-out-alt"></i>
+              </button>
+            </div>
+          </div>
+        </div>
 
         <div className="live-resume">
           <div className="container">
@@ -154,7 +254,32 @@ export default function Dashboard() {
               hobbies={hobbies}
               languages={languages}
               resume={resume}
+              presetImg={presetImg}
+              avatar={avatar}
             />
+            <div className="btn-group">
+              <button
+                className="btn btn-primary"
+                onClick={saveDocument}
+                title="Enregister le document"
+              >
+                <i className="fa fa-save"></i>
+              </button>
+              <button
+                className="btn btn-info"
+                title="Telecharger le document"
+                onClick={downloadDocument}
+              >
+                <i className="fa fa-download"></i>
+              </button>
+              <button
+                className="btn btn-danger"
+                title="Se deconnecter"
+                onClick={logout}
+              >
+                <i className="fa fa-sign-out-alt"></i>
+              </button>
+            </div>
           </div>
         </div>
       </div>

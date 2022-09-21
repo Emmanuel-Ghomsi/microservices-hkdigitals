@@ -2,10 +2,11 @@
 
 .resume {
   display: flex;
-  background-color: $dark-blue;
+  background-color: rgb(16, 16, 48);
   border-radius: 0.5em;
   padding: 0 0.5em;
   margin: 1em 0;
+  font-size: 12px;
 
   .left-content {
     display: flex;
@@ -15,17 +16,19 @@
     padding: 1em;
     color: $white;
 
-    h4, h6 {
-        margin-top: 0;
+    h4,
+    h6 {
+      margin-top: 0;
       color: $white;
     }
 
-    .img-container {
+    .img-responsive {
       align-self: center;
-      width: 50%;
-      border: 1px solid $green;
+      width: 8em;
+      height: 8em;
+      border: 1px solid rgb(184, 184, 22);
       border-radius: 50%;
-      margin-bottom: .8em;
+      margin-bottom: 0.8em;
     }
 
     .summary-header {
@@ -33,28 +36,33 @@
 
       .text-name {
         text-transform: uppercase;
+        text-align: center;
+        font-size: 18px;
       }
 
       .text-job {
         font-style: italic;
+        text-align: center;
+        font-size: 15px;
       }
 
-      .text-job {
+      .text-summary {
         text-align: justify;
+        margin: 1em 0;
       }
     }
 
-    .contact-section,
-    .skill-section {
+    .left-section {
       .title {
-        border-left: 3px solid $green;
+        border-left: 3px solid rgb(184, 184, 22);
         padding-left: 0.4em;
-        margin-bottom: .7em;
+        margin-bottom: 0.3em;
+        font-size: 17px;
       }
 
       ul {
         text-decoration: none;
-        padding-left: 0;
+        padding-left: 0.5em;
 
         li {
           display: flex;
@@ -62,17 +70,24 @@
           list-style: none;
 
           i {
-            margin-right: .8em;
-            color: $green;
+            margin-right: 0.8em;
+            color: rgb(184, 184, 22);
           }
 
-          input[type=range] {
-            margin-left: .8em;
-            color: $green;
+          .circle-level {
+            margin-left: 0.8em;
+            background-color: $white;
+            width: 1em;
+            height: 1em;
+            border-radius: 50%;
+
+            &.green {
+              background-color: rgb(184, 184, 22);
+            }
           }
 
           p {
-            margin-bottom: 10px;
+            margin-bottom: 0;
           }
         }
       }
@@ -80,8 +95,46 @@
   }
 
   .right-content {
+    display: flex;
+    flex-direction: column;
     width: 53%;
-    padding: 1em;
     background-color: $white;
+
+    .right-section {
+      .cover-div {
+        position: relative;
+        left: -1em;
+        background-color: rgb(184, 184, 22);
+
+        .title {
+          padding: 0.2em 1.5em;
+          text-transform: uppercase;
+          font-size: 17px;
+        }
+      }
+
+      .experience-infos,
+      .formation-infos {
+        padding: 0 2em;
+        h6 {
+          color: rgb(184, 184, 22);
+          text-transform: uppercase;
+          font-weight: bold;
+          font-size: 15px;
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+        p {
+          color: #000;
+          font-style: italic;
+          font-weight: bold;
+          margin-bottom: 0;
+          line-height: 1.8em;
+        }
+      }
+      .experience-description {
+        line-height: 1.8em;
+      }
+    }
   }
 }
