@@ -58,6 +58,7 @@ export default function Dashboard() {
   const avatarInState = useSelector((state) => state.image.image); // get store state status from avatar
 
   const [user, setUser] = useState({});
+  const [userCopy, setUserCopy] = useState({}); // pour éviter le block lors de la saisie des données du user
   const [experiences, setExperiences] = useState([]);
   const [experience, setExperience] = useState(null);
   const [formations, setFormations] = useState([]);
@@ -83,7 +84,10 @@ export default function Dashboard() {
     if (!auth.token && !auth._id) navigate("/signin");
     else {
       if (userInState === null) dispatch(getUser());
-      else setUser(userInState);
+      else {
+        setUser(userInState)
+        setUserCopy(userInState)
+      };
 
       // Get Experiences
       if (user._id && experiencesInState === null)
@@ -135,6 +139,7 @@ export default function Dashboard() {
     hobbiesInState,
     resumeInState,
     avatarInState,
+    userCopy,
   ]);
 
   const saveDocument = (e) => {

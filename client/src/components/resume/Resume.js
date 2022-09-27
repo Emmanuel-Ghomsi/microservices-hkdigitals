@@ -14,7 +14,9 @@ export default function Resume(props) {
             props.presetImg != ""
               ? props.presetImg
               : props.avatar != null
-              ? props.avatar[0].url
+              ? props.avatar[0] != undefined
+                ? props.avatar[0].url
+                : "#"
               : "#"
           }
         />
