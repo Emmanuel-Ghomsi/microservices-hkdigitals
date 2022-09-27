@@ -62,6 +62,7 @@ services:
 
   client:
     build: ./client
+    env_file: ./client/.env
     volumes:
       - ./client:/var/www
       - nodemodules:/var/www/node_modules
