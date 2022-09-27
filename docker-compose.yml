@@ -1,0 +1,81 @@
+version: "3"
+
+services:
+  gateway:
+    build: ./gateway
+    # use nodemon rather than node for local dev
+    command: nodemon app.js
+    env_file: ./gateway/.env
+    volumes:
+      - ./gateway:/var/www
+    ports:
+      - "3003:3003"
+    depends_on:
+      - users
+      - resume
+      - image
+
+  users:
+    build: ./users
+    # use nodemon rather than node for local dev
+    command: nodemon src/index.js
+    env_file: ./users/.env
+    volumes:
+      - ./users:/var/www
+      - nodemodules:/var/www/node_modules
+    ports:
+      - "3004:3004"
+    links:
+      - mongo
+    depends_on:
+      - mongo
+
+  resume:
+    build: ./resume
+    # use nodemon rather than node for local dev
+    command: nodemon src/index.js
+    env_file: ./resume/.env
+    volumes:
+      - ./resume:/var/www
+      - nodemodules:/var/www/node_modules
+    ports:
+      - "3005:3005"
+    links:
+      - mongo
+    depends_on:
+      - mongo
+
+  image:
+    build: ./image
+    # use nodemon rather than node for local dev
+    command: nodemon src/index.js
+    env_file: ./image/.env
+    volumes:
+      - ./image:/var/www
+      - nodemodules:/var/www/node_modules
+    ports:
+      - "3006:3006"
+    links:
+      - mongo
+    depends_on:
+      - mongo
+
+  client:
+    build: ./client
+    volumes:
+      - ./client:/var/www
+      - nodemodules:/var/www/node_modules
+    ports:
+      - "3002:80"
+    depends_on:
+      - gateway
+
+  mongo:
+    image: mongo:latest
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
+
+volumes:
+  nodemodules: {}

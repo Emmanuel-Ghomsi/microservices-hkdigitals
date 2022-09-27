@@ -20,7 +20,6 @@ export default function ModalExperience(props) {
 
   const handleCreateExperience = (e) => {
     e.stopPropagation();
-
     try {
       dispatch(addExperience(createExperience, props.user_id));
       props.setExperiences((experiences) => [...experiences, createExperience]);
@@ -224,7 +223,7 @@ export default function ModalExperience(props) {
                           : ""
                       }
                       init={{
-                        height: 500,
+                        height: 200,
                         menubar: false,
                         plugins: [
                           "advlist",
