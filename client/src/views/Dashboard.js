@@ -11,6 +11,7 @@ import ModalSocial from "../components/resume/social/modal/ModalSocial";
 import ModalSkill from "../components/resume/skill/modal/ModalSkill";
 import ModalLanguage from "../components/resume/language/modal/ModalLanguage";
 import ModalHobby from "../components/resume/hobby/modal/ModalHobby";
+import ModalSelectTemplate from "../components/resume/templates/modal/ModalSelectTemplate";
 import Resume from "../components/resume/Resume";
 
 // Actions
@@ -56,6 +57,7 @@ export default function Dashboard() {
   const hobbiesInState = useSelector((state) => state.hobby.hobbies); // get store state status from hobbies
   const resumeInState = useSelector((state) => state.resume.resume); // get store state status from resume
   const avatarInState = useSelector((state) => state.image.image); // get store state status from avatar
+  const selectedTemplate = localStorage.getItem("selectedTemplate");
 
   const [user, setUser] = useState({});
   const [userCopy, setUserCopy] = useState({}); // pour éviter le block lors de la saisie des données du user
@@ -77,6 +79,7 @@ export default function Dashboard() {
   const [avatarFinal, setAvatarFinal] = useState(null); // the Final avatar to send to cloudinary server
   const [avatar, setAvatar] = useState(null); // the avatar
   const [presetImg, setPresetImg] = useState(""); // preset image
+  const [template, setTemplate] = useState(selectedTemplate);
 
   // Before mount, mount and update component
   useEffect(() => {
@@ -85,9 +88,9 @@ export default function Dashboard() {
     else {
       if (userInState === null) dispatch(getUser());
       else {
-        setUser(userInState)
-        setUserCopy(userInState)
-      };
+        setUser(userInState);
+        setUserCopy(userInState);
+      }
 
       // Get Experiences
       if (user._id && experiencesInState === null)
@@ -140,6 +143,7 @@ export default function Dashboard() {
     resumeInState,
     avatarInState,
     userCopy,
+    template,
   ]);
 
   const saveDocument = (e) => {
@@ -240,68 +244,100 @@ export default function Dashboard() {
             />
 
             <div className="phone-visible btn-group">
-              <button
-                className="btn btn-circle btn-primary"
+              <span
+                className="btn"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setOpenModal(true);
+                  setModalType("template");
+                }}
+                title="Choisir un modèle différent"
+              >
+                <i className="text-primary fw-bold fa fa-recycle"></i>
+              </span>
+              <span
+                className="btn"
                 onClick={saveDocument}
                 title="Enregister le document"
               >
-                <i className="fa fa-save"></i>
-              </button>
-              <button
-                className="btn btn-circle btn-info"
+                <i className="text-warning fw-bold fa fa-save"></i>
+              </span>
+              <span
+                className="btn"
                 title="Telecharger le document"
                 onClick={downloadDocument}
               >
-                <i className="fa fa-download"></i>
-              </button>
-              <button
-                className="btn btn-circle btn-danger"
-                title="Se deconnecter"
-                onClick={logout}
-              >
-                <i className="fa fa-sign-out"></i>
-              </button>
+                <i className="text-info fw-bold fa fa-download"></i>
+              </span>
+              <span className="btn" title="Se deconnecter" onClick={logout}>
+                <i className="text-danger fw-bold fa fa-sign-out"></i>
+              </span>
             </div>
           </div>
         </div>
 
         <div className="live-resume">
           <div className="container my-2">
-            <Resume
-              componentRef={componentRef}
-              user={user}
-              experiences={experiences}
-              formations={formations}
-              socials={socials}
-              skills={skills}
-              hobbies={hobbies}
-              languages={languages}
-              resume={resume}
-              presetImg={presetImg}
-              avatar={avatar}
-            />
+            {template != null ? (
+              template === "default" ? (
+                <Resume
+                  componentRef={componentRef}
+                  user={user}
+                  experiences={experiences}
+                  formations={formations}
+                  socials={socials}
+                  skills={skills}
+                  hobbies={hobbies}
+                  languages={languages}
+                  resume={resume}
+                  presetImg={presetImg}
+                  avatar={avatar}
+                />
+              ) : null
+            ) : (
+              <div className="text-center text-white fw-bold fs-2 off-center">
+                <p>Veuillez choisir un modèle pour votre CV</p>
+                <span
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    setOpenModal(true);
+                    setModalType("template");
+                  }}
+                >
+                  <i className="fa fa-recycle"></i>
+                </span>
+              </div>
+            )}
+
             <div className="btn-group">
-              <button
-                className="btn btn-circle btn-primary"
+              <span
+                className="btn"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setOpenModal(true);
+                  setModalType("template");
+                }}
+                title="Choisir un modèle différent"
+              >
+                <i className="text-primary fw-bold fa fa-recycle"></i>
+              </span>
+              <span
+                className="btn"
                 onClick={saveDocument}
                 title="Enregister le document"
               >
-                <i className="fa fa-save"></i>
-              </button>
-              <button
-                className="btn btn-circle btn-info"
+                <i className="text-warning fw-bold fa fa-save"></i>
+              </span>
+              <span
+                className="btn"
                 title="Telecharger le document"
                 onClick={downloadDocument}
               >
-                <i className="fa fa-download"></i>
-              </button>
-              <button
-                className="btn btn-circle btn-danger"
-                title="Se deconnecter"
-                onClick={logout}
-              >
-                <i className="fa fa-sign-out"></i>
-              </button>
+                <i className="text-info fw-bold fa fa-download"></i>
+              </span>
+              <span className="btn" title="Se deconnecter" onClick={logout}>
+                <i className="text-danger fw-bold fa fa-sign-out"></i>
+              </span>
             </div>
           </div>
         </div>
@@ -364,6 +400,13 @@ export default function Dashboard() {
           hobby={hobby}
           hobbies={hobbies}
           setHobbies={setHobbies}
+        />
+      ) : null}
+
+      {openModal && modalType === "template" ? (
+        <ModalSelectTemplate
+          closeOpenModal={setOpenModal}
+          setTemplate={setTemplate}
         />
       ) : null}
     </div>

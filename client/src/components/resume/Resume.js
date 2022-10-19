@@ -1,4 +1,4 @@
-import "../../assets/scss/resume.scss";
+import "../../assets/scss/resume/default-resume.scss";
 
 // Moment JS to format date
 import moment from "moment";

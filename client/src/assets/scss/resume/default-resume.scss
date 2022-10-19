@@ -1,0 +1,143 @@
+@import "../_variables.scss";
+
+.resume {
+  display: flex;
+  background-color: $violet;
+  border-radius: 0.5em;
+  padding: 0 0.5em;
+  font-size: 12px;
+
+  .left-content {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    padding: 1em;
+    color: $white;
+
+    h4,
+    h6 {
+      margin-top: 0;
+      color: $white;
+    }
+
+    .img-responsive {
+      align-self: center;
+      width: 8em;
+      height: 8em;
+      border: 1px solid $yellow;
+      border-radius: 50%;
+      margin-bottom: 0.8em;
+    }
+
+    .summary-header {
+      align-self: center;
+
+      .text-name {
+        text-transform: uppercase;
+        text-align: center;
+        font-size: 18px;
+      }
+
+      .text-job {
+        font-style: italic;
+        text-align: center;
+        font-size: 15px;
+      }
+
+      .text-summary {
+        text-align: justify;
+        margin: 1em 0;
+      }
+    }
+
+    .left-section {
+      .title {
+        border-left: 3px solid $yellow;
+        padding-left: 0.4em;
+        margin-bottom: 0.3em;
+        font-size: 17px;
+      }
+
+      ul {
+        text-decoration: none;
+        padding-left: 0.5em;
+
+        li {
+          display: flex;
+          align-items: baseline;
+          list-style: none;
+
+          i {
+            margin-right: 0.8em;
+            color: $yellow;
+          }
+
+          .circle-level {
+            margin-left: 0.8em;
+            background-color: $white;
+            width: 1em;
+            height: 1em;
+            border-radius: 50%;
+
+            &.green {
+              background-color: $yellow;
+            }
+          }
+
+          p {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .right-content {
+    display: flex;
+    flex-direction: column;
+    width: 53%;
+    background-color: $white;
+
+    .right-section {
+      .cover-div {
+        position: relative;
+        left: -1em;
+        background-color: $yellow;
+
+        .title {
+          padding: 0.2em 1.5em;
+          text-transform: uppercase;
+          font-size: 17px;
+        }
+      }
+
+      .experience-infos,
+      .formation-infos {
+        padding: 0 2em;
+        h6 {
+          color: $yellow;
+          text-transform: uppercase;
+          font-weight: bold;
+          font-size: 15px;
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+        p {
+          color: #000;
+          font-style: italic;
+          font-weight: bold;
+          margin-bottom: 0;
+          line-height: 1.8em;
+        }
+      }
+      .experience-description {
+        line-height: 1.8em;
+        p, h6 {
+          color: $text-color;
+          font-style: normal;
+          font-weight: normal;
+        }
+      }
+    }
+  }
+}

@@ -155,3 +155,51 @@ a {
     }
   }
 }
+
+.text-white {
+  color: $white;
+}
+
+.fs-2 {
+  font-size: 1rem;
+}
+
+.fw-bold {
+  font-weight: bold;
+}
+
+.off-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10rem 0;
+}
+
+.template-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.template-preview {
+  width: 35%;
+  margin: .5rem 0;
+
+  img {
+    height: auto;
+
+    &:hover {
+      transform: scale(1.1);
+      transition: transform 0.5ms ease-in-out;
+    }
+  }
+}
+
+.text-warning {
+  color: orange;
+}
+
+.text-info {
+  color: indigo;
+}
