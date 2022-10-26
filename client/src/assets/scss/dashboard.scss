@@ -203,3 +203,16 @@ a {
 .text-info {
   color: indigo;
 }
+
+.bg-white {
+  background-color: $white;
+}
+
+.py-2 {
+  padding-top: .2em;
+  padding-bottom: .2em;
+}
+
+.rounded {
+  border-radius: 2em;
+}

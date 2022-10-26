@@ -1,0 +1,132 @@
+@import "../_variables.scss";
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Montserrat&display=swap");
+
+.medical-resume {
+  position: relative;
+  display: flex;
+  background-color: $white;
+  border-radius: 0.5em;
+  font-size: 10px;
+  overflow: scroll;
+  font-family: "Libre Baskerville", serif;
+
+  .mt-2 {
+    margin-top: 1.5em;
+  }
+
+  .top-div {
+    width: 100%;
+    height: 30em;
+    background-color: #66a3d831;
+    position: absolute;
+    top: 0;
+    transform: scale(1.3) rotate(10deg) translate(4em, -11.5em);
+  }
+
+  .left-section {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    background-color: #66a3d86a;
+    padding: 3em 1.8em 2em 2em;
+
+    .img-responsive {
+      align-self: center;
+      width: 14em;
+      height: 14em;
+      border-radius: 50%;
+      z-index: 2;
+
+      & + div {
+        margin-top: 4em;
+      }
+    }
+
+    .infos {
+      color: #444440;
+      padding: 0 1em;
+
+      .title {
+        text-transform: uppercase;
+        font-size: 11.7px;
+        font-family: "Montserrat", sans-serif;
+      }
+      .details {
+        padding-left: 0.3em;
+        margin-bottom: 0;
+        li {
+          display: flex;
+          align-items: baseline;
+          flex-wrap: wrap;
+
+          i {
+            margin-right: 0.5em;
+          }
+          p {
+            margin-bottom: 0;
+          }
+        }
+      }
+      p {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .right-section {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    padding: 1em 0;
+
+    .name-section {
+      padding: 0 2em;
+      h2 {
+        font-size: 32px;
+      }
+      h2,
+      p {
+        text-transform: uppercase;
+      }
+      p {
+        font-size: 14.6px;
+        font-family: "Montserrat", sans-serif;
+        font-weight: bold;
+      }
+    }
+
+    .infos.mt-2 {
+      margin-top: 6em !important;
+    }
+
+    .infos {
+      padding: 0 4em;
+      margin-top: 2em;
+
+      .title {
+        text-transform: uppercase;
+        font-size: 11.7px;
+        margin-top: 0;
+        font-family: "Montserrat", sans-serif;
+      }
+      .text-infos {
+        padding-left: 0.3em;
+        h6 {
+          margin-top: 0;
+          font-size: 11px;
+        }
+        p {
+          font-style: italic;
+          font-family: "Montserrat", sans-serif;
+        }
+        .text-description {
+          color: $text-color;
+          margin-bottom: 0.6em;
+        }
+      }
+      p {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

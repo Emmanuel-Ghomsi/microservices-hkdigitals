@@ -1,0 +1,147 @@
+@import "../_variables.scss";
+@import url("https://fonts.googleapis.com/css2?family=Lora&family=Raleway&display=swap");
+
+.modern-resume {
+  position: relative;
+  display: flex;
+  background-color: $white;
+  border-radius: 0.5em;
+  font-size: 10px;
+  overflow: scroll;
+  font-family: "Lora", serif;
+
+  .mt-2 {
+    margin-top: 1.5em;
+  }
+
+  .img-responsive {
+    position: absolute;
+    top: 5%;
+    left: 25%;
+    align-self: center;
+    width: 18em;
+    height: 22em;
+    z-index: 2;
+  }
+
+  .left-section {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    padding: 12em 2.5em 2em 2.5em;
+    background-color: #056367;
+    color: $white;
+
+    hr {
+      height: 2px;
+      width: 30%;
+    }
+
+    .infos {
+      .title {
+        letter-spacing: 3px;
+        font-family: "Raleway", sans-serif;
+        text-transform: uppercase;
+        font-size: 14px;
+        color: $white;
+      }
+      .details {
+        padding-left: 0.3em;
+        margin-bottom: 0;
+        li {
+          display: flex;
+          align-items: baseline;
+          flex-wrap: wrap;
+
+          i {
+            margin-right: 0.5em;
+          }
+          p {
+            margin-bottom: 0;
+          }
+        }
+      }
+      p {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .right-section {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    padding: 1em 0;
+
+    hr {
+      height: 2px;
+      width: 20%;
+      background-color: #056367;
+      margin-left: -4em;
+      margin-bottom: 0;
+    }
+
+    .name-section {
+      margin-top: 5em;
+      margin-left: 16em;
+
+      h2 {
+        color: #056367;
+        font-size: 32px;
+        text-transform: uppercase;
+        font-family: "Raleway", sans-serif;
+        font-weight: normal;
+        margin-top: 0.5em;
+        letter-spacing: 3px;
+      }
+      p {
+        font-size: 16px;
+        font-weight: bold;
+      }
+    }
+
+    .infos.mt-2 {
+      margin-top: 10em !important;
+    }
+
+    .infos {
+      padding: 0 4em;
+      margin-top: 2em;
+
+      hr {
+        margin: 0;
+        background-color: #056367;
+        width: 10%;
+      }
+
+      .title {
+        text-transform: uppercase;
+        font-size: 14px;
+        font-family: "Raleway", sans-serif;
+        margin-top: 0;
+        color: #056367;
+        letter-spacing: 3px;
+      }
+      .text-infos {
+        padding-left: 0.3em;
+        h6 {
+          margin-top: 0;
+          font-size: 12px;
+          font-weight: normal;
+        }
+        p {
+          font-family: "Lora", serif;
+          font-style: italic;
+          color: #056367;
+        }
+        .text-description {
+          color: $text-color;
+          margin-bottom: 0.6em;
+        }
+      }
+      p {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

@@ -1,12 +1,12 @@
-import "../../assets/scss/resume/default-resume.scss";
+import "../../../assets/scss/resume/default-resume.scss";
 
 // Moment JS to format date
 import moment from "moment";
 import "moment/locale/fr";
 
-export default function Resume(props) {
+export default function DefaultResume(props) {
   return (
-    <div className="resume" ref={props.componentRef}>
+    <div id="resume" className="default-resume" ref={props.componentRef}>
       <div className="left-content">
         <img
           className="img-responsive"

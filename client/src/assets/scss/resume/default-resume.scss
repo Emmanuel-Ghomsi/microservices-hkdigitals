@@ -1,17 +1,20 @@
 @import "../_variables.scss";
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan&family=Montserrat&family=PT+Sans&display=swap");
 
-.resume {
+.default-resume {
   display: flex;
-  background-color: $violet;
+  background-color: #1d2a42;
   border-radius: 0.5em;
   padding: 0 0.5em;
-  font-size: 12px;
+  font-size: 11px;
+  font-family: "PT Sans", sans-serif;
+  overflow: scroll;
 
   .left-content {
     display: flex;
     flex-direction: column;
     width: 45%;
-    padding: 1em;
+    padding: 1em 2em;
     color: $white;
 
     h4,
@@ -22,10 +25,11 @@
 
     .img-responsive {
       align-self: center;
-      width: 8em;
-      height: 8em;
-      border: 1px solid $yellow;
+      width: 15em;
+      height: 15em;
+      border: 1px solid #ffcc00;
       border-radius: 50%;
+      margin-top: 1em;
       margin-bottom: 0.8em;
     }
 
@@ -35,13 +39,15 @@
       .text-name {
         text-transform: uppercase;
         text-align: center;
-        font-size: 18px;
+        font-size: 24px;
+        font-family: "League Spartan", sans-serif;
       }
 
       .text-job {
         font-style: italic;
         text-align: center;
-        font-size: 15px;
+        font-size: 14px;
+        font-family: "Montserrat", sans-serif;
       }
 
       .text-summary {
@@ -52,10 +58,11 @@
 
     .left-section {
       .title {
-        border-left: 3px solid $yellow;
+        border-left: 3px solid #ffcc00;
         padding-left: 0.4em;
         margin-bottom: 0.3em;
-        font-size: 17px;
+        font-size: 16px;
+        font-family: "League Spartan", sans-serif;
       }
 
       ul {
@@ -69,7 +76,7 @@
 
           i {
             margin-right: 0.8em;
-            color: $yellow;
+            color: #ffcc00;
           }
 
           .circle-level {
@@ -80,7 +87,7 @@
             border-radius: 50%;
 
             &.green {
-              background-color: $yellow;
+              background-color: #ffcc00;
             }
           }
 
@@ -101,13 +108,16 @@
     .right-section {
       .cover-div {
         position: relative;
+        top: 10px;
         left: -1em;
-        background-color: $yellow;
+        background-color: #ffcc00;
 
         .title {
           padding: 0.2em 1.5em;
           text-transform: uppercase;
-          font-size: 17px;
+          font-size: 14px;
+          font-family: "League Spartan", sans-serif;
+          font-weight: 900;
         }
       }
 
@@ -115,12 +125,13 @@
       .formation-infos {
         padding: 0 2em;
         h6 {
-          color: $yellow;
+          color: #9f8415;
           text-transform: uppercase;
           font-weight: bold;
-          font-size: 15px;
-          margin-top: 0;
+          font-size: 13px;
+          margin-top: 20px;
           margin-bottom: 0;
+          font-family: "Montserrat", sans-serif;
         }
         p {
           color: #000;
@@ -132,7 +143,8 @@
       }
       .experience-description {
         line-height: 1.8em;
-        p, h6 {
+        p,
+        h6 {
           color: $text-color;
           font-style: normal;
           font-weight: normal;

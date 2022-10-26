@@ -6,7 +6,7 @@ export default function ModalSelectTemplate(props) {
   //const [createExperience, setCreateExperience] = useState(props.experience);
 
   const handleSelectTemplate = (template) => {
-    if(localStorage.getItem("selectedTemplate") == null)
+    if (localStorage.getItem("selectedTemplate") == null)
       localStorage.setItem("selectedTemplate", template);
     else {
       localStorage.removeItem("selectedTemplate");
@@ -46,7 +46,7 @@ export default function ModalSelectTemplate(props) {
                 <div className="template-preview">
                   <img
                     className="template-img"
-                    src={require("../img/img.png")}
+                    src={require("../img/Default-resume.webp")}
                     onClick={(e) => {
                       e.stopPropagation();
                       handleSelectTemplate("default");
@@ -57,12 +57,20 @@ export default function ModalSelectTemplate(props) {
                   <img
                     className="template-img"
                     src={require("../img/Medicale-bleu.jpeg")}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleSelectTemplate("medical");
+                    }}
                   />
                 </div>
                 <div className="template-preview">
                   <img
                     className="template-img"
                     src={require("../img/Moderne-vert.jpeg")}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleSelectTemplate("modern");
+                    }}
                   />
                 </div>
               </div>

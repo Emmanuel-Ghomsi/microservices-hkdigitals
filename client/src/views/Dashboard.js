@@ -12,7 +12,9 @@ import ModalSkill from "../components/resume/skill/modal/ModalSkill";
 import ModalLanguage from "../components/resume/language/modal/ModalLanguage";
 import ModalHobby from "../components/resume/hobby/modal/ModalHobby";
 import ModalSelectTemplate from "../components/resume/templates/modal/ModalSelectTemplate";
-import Resume from "../components/resume/Resume";
+import DefaultResume from "../components/resume/templates/DefaultResume";
+import MedicalResume from "../components/resume/templates/MedicalResume";
+import ModernResume from "../components/resume/templates/ModernResume";
 
 // Actions
 import { editUser, getUser } from "../store/actions/userActions";
@@ -196,11 +198,11 @@ export default function Dashboard() {
     e.preventDefault();
     e.stopPropagation();
 
-    const height = document.querySelector(".resume").clientHeight;
+    const height = document.querySelector("#resume").clientHeight;
     if (height < 1120)
-      document.querySelector(".resume").style.height = "1120px";
+      document.querySelector("#resume").style.height = "1120px";
     handleDownload();
-    document.querySelector(".resume").style.height = `${height}px`;
+    document.querySelector("#resume").style.height = `${height}px`;
   };
 
   const handleDownload = useReactToPrint({
@@ -208,6 +210,66 @@ export default function Dashboard() {
     documentTitle: user.name + "-cv",
     onAfterPrint: () => console.log("Success"),
   });
+
+  const renderTemplate = () => {
+    let render = null;
+
+    switch (template) {
+      case "medical":
+        render = (
+          <MedicalResume
+            componentRef={componentRef}
+            user={user}
+            experiences={experiences}
+            formations={formations}
+            socials={socials}
+            skills={skills}
+            hobbies={hobbies}
+            languages={languages}
+            resume={resume}
+            presetImg={presetImg}
+            avatar={avatar}
+          />
+        );
+        break;
+      case "modern":
+        render = (
+          <ModernResume
+            componentRef={componentRef}
+            user={user}
+            experiences={experiences}
+            formations={formations}
+            socials={socials}
+            skills={skills}
+            hobbies={hobbies}
+            languages={languages}
+            resume={resume}
+            presetImg={presetImg}
+            avatar={avatar}
+          />
+        );
+        break;
+      default:
+        render = (
+          <DefaultResume
+            componentRef={componentRef}
+            user={user}
+            experiences={experiences}
+            formations={formations}
+            socials={socials}
+            skills={skills}
+            hobbies={hobbies}
+            languages={languages}
+            resume={resume}
+            presetImg={presetImg}
+            avatar={avatar}
+          />
+        );
+        break;
+    }
+
+    return render;
+  };
 
   return (
     <div className="body-wrap">
@@ -253,24 +315,24 @@ export default function Dashboard() {
                 }}
                 title="Choisir un modèle différent"
               >
-                <i className="text-primary fw-bold fa fa-recycle"></i>
+                <i className="text-primary fw-bold fas fa-recycle"></i>
               </span>
               <span
                 className="btn"
                 onClick={saveDocument}
                 title="Enregister le document"
               >
-                <i className="text-warning fw-bold fa fa-save"></i>
+                <i className="text-warning fw-bold fas fa-save"></i>
               </span>
               <span
                 className="btn"
                 title="Telecharger le document"
                 onClick={downloadDocument}
               >
-                <i className="text-info fw-bold fa fa-download"></i>
+                <i className="text-info fw-bold fas fa-download"></i>
               </span>
               <span className="btn" title="Se deconnecter" onClick={logout}>
-                <i className="text-danger fw-bold fa fa-sign-out"></i>
+                <i className="text-danger fw-bold fas fa-sign-out-alt"></i>
               </span>
             </div>
           </div>
@@ -279,21 +341,7 @@ export default function Dashboard() {
         <div className="live-resume">
           <div className="container my-2">
             {template != null ? (
-              template === "default" ? (
-                <Resume
-                  componentRef={componentRef}
-                  user={user}
-                  experiences={experiences}
-                  formations={formations}
-                  socials={socials}
-                  skills={skills}
-                  hobbies={hobbies}
-                  languages={languages}
-                  resume={resume}
-                  presetImg={presetImg}
-                  avatar={avatar}
-                />
-              ) : null
+              renderTemplate()
             ) : (
               <div className="text-center text-white fw-bold fs-2 off-center">
                 <p>Veuillez choisir un modèle pour votre CV</p>
@@ -304,12 +352,12 @@ export default function Dashboard() {
                     setModalType("template");
                   }}
                 >
-                  <i className="fa fa-recycle"></i>
+                  <i className="fas fa-recycle"></i>
                 </span>
               </div>
             )}
 
-            <div className="btn-group">
+            <div className="btn-group bg-white py-2 rounded">
               <span
                 className="btn"
                 onClick={(event) => {
@@ -319,24 +367,24 @@ export default function Dashboard() {
                 }}
                 title="Choisir un modèle différent"
               >
-                <i className="text-primary fw-bold fa fa-recycle"></i>
+                <i className="text-primary fw-bold fas fa-recycle"></i>
               </span>
               <span
                 className="btn"
                 onClick={saveDocument}
                 title="Enregister le document"
               >
-                <i className="text-warning fw-bold fa fa-save"></i>
+                <i className="text-warning fw-bold fas fa-save"></i>
               </span>
               <span
                 className="btn"
                 title="Telecharger le document"
                 onClick={downloadDocument}
               >
-                <i className="text-info fw-bold fa fa-download"></i>
+                <i className="text-info fw-bold fas fa-download"></i>
               </span>
               <span className="btn" title="Se deconnecter" onClick={logout}>
-                <i className="text-danger fw-bold fa fa-sign-out"></i>
+                <i className="text-danger fw-bold fas fa-sign-out-alt"></i>
               </span>
             </div>
           </div>
