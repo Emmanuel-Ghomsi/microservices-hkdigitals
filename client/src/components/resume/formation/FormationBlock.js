@@ -67,7 +67,7 @@ export default function FormationBlock(props) {
                     ? props.formations.map((formation, index) => {
                         return (
                           <Draggable
-                            key={formation._id}
+                            key={index}
                             draggableId={formation._id}
                             index={index}
                           >

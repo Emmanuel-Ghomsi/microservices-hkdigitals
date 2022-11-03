@@ -7,6 +7,9 @@ import {
   editExperience,
 } from "../../../../store/actions/experienceActions";
 
+// Toastify for popup informations
+import { toast } from "react-toastify";
+
 import "../../../../assets/scss/modal.scss";
 
 // Editor
@@ -20,12 +23,28 @@ export default function ModalExperience(props) {
 
   const handleCreateExperience = (e) => {
     e.stopPropagation();
-    try {
-      dispatch(addExperience(createExperience, props.user_id));
-      props.setExperiences((experiences) => [...experiences, createExperience]);
-    } catch (error) {
-      console.log(error);
-    }
+
+    if (
+      createExperience.role != null &&
+      createExperience.company != null &&
+      createExperience.start_date != null &&
+      createExperience.address != null &&
+      createExperience.description != null
+    )
+      try {
+        dispatch(addExperience(createExperience, props.user_id));
+        props.setExperiences((experiences) => [
+          ...experiences,
+          createExperience,
+        ]);
+      } catch (error) {
+        console.log(error);
+      }
+    else
+      toast.error("Données invalides", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+
     props.closeOpenModal(false);
   };
 
@@ -56,7 +75,7 @@ export default function ModalExperience(props) {
         }}
       />
       <div className="centered">
-        <div className="modal modal-md">
+        <div className="modal modal-lg">
           <div className="modal-header">
             <h5 className="heading">Ajouter une experience</h5>
           </div>

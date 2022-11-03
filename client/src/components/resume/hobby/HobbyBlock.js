@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { deleteHobby } from "../../../store/actions/hobbyActions";
 
-import "../../../assets/scss/experience.scss";
+import "../../../assets/scss/hobby.scss";
 
 export default function HobbyBlock(props) {
   const dispatch = useDispatch(); // dispatch events
@@ -38,38 +38,36 @@ export default function HobbyBlock(props) {
         >
           + Ajouter une activité
         </a>
-        <div className="experiences-header">
-          <ul className="skills">
+        <div className="hobby-header">
+          <ul className="hobbies">
             {props.hobbies !== null
               ? props.hobbies.map((hobby, index) => {
                   return (
-                    <li index={index} key={hobby._id}>
-                      <div className="experiences-content">
-                        <div className="experiences-role">
-                          <p>{hobby.name}</p>
+                    <li index={index} key={index}>
+                      <div className="hobby">
+                        <p>{hobby.name}</p>
+                        <div className="hobby-actions">
+                          <a
+                            href="#"
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              props.setOpenModal(true);
+                              props.setModalType("hobby");
+                              props.setHobby(hobby);
+                            }}
+                          >
+                            <i className="fas fa-edit text-secondary mx-2"></i>
+                          </a>
+                          <a
+                            href="#"
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              handleDeleteHobby(hobby._id);
+                            }}
+                          >
+                            <i className="fas fa-trash alt text-danger mx-2"></i>
+                          </a>
                         </div>
-                      </div>
-                      <div className="experiences-actions">
-                        <a
-                          href="#"
-                          onClick={(event) => {
-                            event.stopPropagation();
-                            props.setOpenModal(true);
-                            props.setModalType("hobby");
-                            props.setHobby(hobby);
-                          }}
-                        >
-                          <i className="fas fa-edit text-secondary mx-2"></i>
-                        </a>
-                        <a
-                          href="#"
-                          onClick={(event) => {
-                            event.stopPropagation();
-                            handleDeleteHobby(hobby._id);
-                          }}
-                        >
-                          <i className="fas fa-trash alt text-danger mx-2"></i>
-                        </a>
                       </div>
                     </li>
                   );

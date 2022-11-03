@@ -49,12 +49,12 @@ export default function SocialBlock(props) {
             {props.socials !== null
               ? props.socials.map((social, index) => {
                   return (
-                    <li index={index} key={social._id}>
+                    <li index={index} key={index + "so"}>
                       <div className="experiences-content">
                         <div className="experiences-role">
                           <p>{social.name}</p>
                         </div>
-                        <p>: {social.link}</p>
+                        <p className="space">{social.link}</p>
                       </div>
                       <div className="experiences-actions">
                         <a

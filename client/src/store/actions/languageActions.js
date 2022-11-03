@@ -39,7 +39,7 @@ export const getLanguagesByUser = (user_id) => {
   };
 };
 
-export const addLanguage= (language, user_id) => {
+export const addLanguage = (language, user_id) => {
   return (dispatch, getState) => {
     const token = getState().auth.token; // get the token from store state
 
@@ -49,34 +49,39 @@ export const addLanguage= (language, user_id) => {
         Authorization: `Bearer ${token}`,
       },
     };
+    
+    if (language.name != null && language.level != null)
+      axios
+        .post(
+          `${APP_URL_RESUME}/create-language`,
+          {
+            name: language.name,
+            level: language.level,
+            user: user_id,
+          },
+          config
+        )
+        .then((res) => {
+          toast.success("Language added successfully!", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
 
-    axios
-      .post(
-        `${APP_URL_RESUME}/create-language`,
-        {
-          name: language.name,
-          level: language.level,
-          user: user_id,
-        },
-        config
-      )
-      .then((res) => {
-        toast.success("Language added successfully!", {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-
-        findLanguagesByUserId(user_id, token).then((response) => {
-          // Dispatch event
-          dispatch({
-            type: "GET_LANGUAGES",
-            languages: response.data,
+          findLanguagesByUserId(user_id, token).then((response) => {
+            // Dispatch event
+            dispatch({
+              type: "GET_LANGUAGES",
+              languages: response.data,
+            });
+          });
+        })
+        .catch((err) => {
+          toast.error(JSON.stringify(err.response?.data.error), {
+            position: toast.POSITION.TOP_RIGHT,
           });
         });
-      })
-      .catch((err) => {
-        toast.error(JSON.stringify(err.response?.data.error), {
-          position: toast.POSITION.TOP_RIGHT,
-        });
+    else
+      toast.error("Données invalides", {
+        position: toast.POSITION.TOP_RIGHT,
       });
   };
 };

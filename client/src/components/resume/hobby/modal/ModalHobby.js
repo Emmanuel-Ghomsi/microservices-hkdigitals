@@ -1,21 +1,56 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // From redux - dispatch event && get store state status
 import { useDispatch } from "react-redux";
 import { addHobby, editHobby } from "../../../../store/actions/hobbyActions";
+import CreatableSelect from "react-select/creatable";
 
 import "../../../../assets/scss/modal.scss";
 
 export default function ModalHobby(props) {
   const dispatch = useDispatch(); // dispatch events
   const [hobby, setHobby] = useState(props.hobby);
+  const [sendHobbies, setSendHobbies] = useState([]);
+  const [hobbyNames, setHobbyNames] = useState([]);
+
+  useEffect(() => {
+    let tab = [];
+    // transform option array into string array and set to state
+    props.hobbies.map((opt) => {
+      tab.push(opt.name);
+    });
+    setHobbyNames(tab);
+  }, []);
+
+  const hobyOptions = [
+    { value: "Lecture", label: "Lecture" },
+    { value: "Football", label: "Football" },
+    { value: "Musique", label: "Musique" },
+    { value: "Marche", label: "Marche" },
+    { value: "Basketball", label: "Basketball" },
+  ];
+
+  const hobbyValues = hobyOptions.filter(
+    (ho) => !hobbyNames.includes(ho.value)
+  );
+
+  const onChangeSelect = (option) => {
+    let tab = [];
+    // transform option array into string array and set to state
+    option.map((opt) => {
+      tab.push(opt.value);
+    });
+    setSendHobbies(tab);
+  };
 
   const handleCreateHobby = (e) => {
     e.stopPropagation();
 
     try {
-      dispatch(addHobby(hobby, props.user_id));
-      props.setHobbies((hobbies) => [...hobbies, hobby]);
+      sendHobbies.map((h, index) => {
+        dispatch(addHobby(h, props.user_id));
+        props.setHobbies((hobbies) => [...hobbies, h]);
+      });
     } catch (error) {
       console.log(error);
     }
@@ -48,7 +83,7 @@ export default function ModalHobby(props) {
         }}
       />
       <div className="centered">
-        <div className="modal modal-md">
+        <div className="modal modal-sm">
           <div className="modal-header">
             <h5 className="heading">Ajouter une activité</h5>
           </div>
@@ -68,23 +103,32 @@ export default function ModalHobby(props) {
                 <div className="form-group">
                   <div className="form-content">
                     <label htmlFor="name" className="form-label">
-                      Libellé de l'activité
+                      Choisir ou Créer une activité
                     </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="par ex. Lecture"
-                      id="name"
-                      name="name"
-                      value={hobby !== null ? hobby.name ?? "" : ""}
-                      onChange={(e) => {
-                        e.stopPropagation();
-                        setHobby({
-                          ...hobby,
-                          name: e.target.value,
-                        });
-                      }}
-                    />
+                    {hobby !== null && hobby._id !== undefined ? (
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="par ex. Lecture"
+                        id="name"
+                        name="name"
+                        value={hobby !== null ? hobby.name ?? "" : ""}
+                        onChange={(e) => {
+                          e.stopPropagation();
+                          setHobby({
+                            ...hobby,
+                            name: e.target.value,
+                          });
+                        }}
+                      />
+                    ) : (
+                      <CreatableSelect
+                        isMulti
+                        options={hobbyValues}
+                        placeholder="par ex. Lecture"
+                        onChange={(option) => onChangeSelect(option)}
+                      />
+                    )}
                   </div>
                 </div>
               </div>

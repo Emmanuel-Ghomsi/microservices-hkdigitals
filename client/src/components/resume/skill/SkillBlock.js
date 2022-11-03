@@ -46,12 +46,12 @@ export default function SkillBlock(props) {
             {props.skills !== null
               ? props.skills.map((skill, index) => {
                   return (
-                    <li index={index} key={skill._id}>
+                    <li index={index} key={index + "s"}>
                       <div className="experiences-content">
                         <div className="experiences-role">
                           <p>{skill.name}</p>
                         </div>
-                        <p>: {skill.level}</p>
+                        <p className="space">{skill.level}</p>
                       </div>
                       <div className="experiences-actions">
                         <a

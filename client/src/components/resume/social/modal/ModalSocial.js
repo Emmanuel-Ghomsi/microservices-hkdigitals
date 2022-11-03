@@ -1,24 +1,56 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // From redux - dispatch event && get store state status
 import { useDispatch } from "react-redux";
 import { addSocial, editSocial } from "../../../../store/actions/socialActions";
+
+import CreatableSelect from "react-select/creatable";
+
+// Toastify for popup informations
+import { toast } from "react-toastify";
 
 import "../../../../assets/scss/modal.scss";
 
 export default function ModalSocial(props) {
   const dispatch = useDispatch(); // dispatch events
   const [social, setSocial] = useState(props.social);
+  const [socialNames, setSocialNames] = useState([]);
+
+  useEffect(() => {
+    let tab = [];
+    // transform option array into string array and set to state
+    props.socials.map((opt) => {
+      tab.push(opt.name);
+    });
+    setSocialNames(tab);
+  }, []);
+
+  const socialOptions = [
+    { value: "Facebook", label: "Facebook" },
+    { value: "LinkedIn", label: "LinkedIn" },
+    { value: "Instagram", label: "Instagram" },
+    { value: "Pinterest", label: "Pinterest" },
+  ];
+
+  const socialValues = socialOptions.filter(
+    (so) => !socialNames.includes(so.value)
+  );
 
   const handleCreateSocial = (e) => {
     e.stopPropagation();
 
-    try {
-      dispatch(addSocial(social, props.user_id));
-      props.setSocials((socials) => [...socials, social]);
-    } catch (error) {
-      console.log(error);
-    }
+    if (social.name != null && social.link != null)
+      try {
+        dispatch(addSocial(social, props.user_id));
+        props.setSocials((socials) => [...socials, social]);
+      } catch (error) {
+        console.log(error);
+      }
+    else
+      toast.error("Données invalides", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+
     props.closeOpenModal(false);
   };
 
@@ -48,7 +80,7 @@ export default function ModalSocial(props) {
         }}
       />
       <div className="centered">
-        <div className="modal modal-md">
+        <div className="modal modal-sm">
           <div className="modal-header">
             <h5 className="heading">Ajouter un lien vers un réseau social</h5>
           </div>
@@ -70,21 +102,34 @@ export default function ModalSocial(props) {
                     <label htmlFor="name" className="form-label">
                       Nom du réseau
                     </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="par ex. Facebook"
-                      id="name"
-                      name="name"
-                      value={social !== null ? social.name ?? "" : ""}
-                      onChange={(e) => {
-                        e.stopPropagation();
-                        setSocial({
-                          ...social,
-                          name: e.target.value,
-                        });
-                      }}
-                    />
+                    {social !== null && social._id !== undefined ? (
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="par ex. Facebook"
+                        id="name"
+                        name="name"
+                        value={social !== null ? social.name ?? "" : ""}
+                        onChange={(e) => {
+                          e.stopPropagation();
+                          setSocial({
+                            ...social,
+                            name: e.target.value,
+                          });
+                        }}
+                      />
+                    ) : (
+                      <CreatableSelect
+                        options={socialValues}
+                        placeholder="par ex. Facebook"
+                        onChange={(option) =>
+                          setSocial({
+                            ...social,
+                            name: option.value,
+                          })
+                        }
+                      />
+                    )}
                   </div>
                 </div>
                 <div className="form-group">

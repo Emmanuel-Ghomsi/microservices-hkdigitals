@@ -47,12 +47,12 @@ export default function LanguageBlock(props) {
             {props.languages !== null
               ? props.languages.map((language, index) => {
                   return (
-                    <li index={index} key={language._id}>
+                    <li index={index} key={index + "l"}>
                       <div className="experiences-content">
                         <div className="experiences-role">
                           <p>{language.name}</p>
                         </div>
-                        <p>: {language.level}</p>
+                        <p className="space">{language.level}</p>
                       </div>
                       <div className="experiences-actions">
                         <a

@@ -1,25 +1,54 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // From redux - dispatch event && get store state status
 import { useDispatch } from "react-redux";
 import { addSkill, editSkill } from "../../../../store/actions/skillActions";
+
+import CreatableSelect from "react-select/creatable";
+
+// Toastify for popup informations
+import { toast } from "react-toastify";
 
 import "../../../../assets/scss/modal.scss";
 
 export default function ModalSkill(props) {
   const dispatch = useDispatch(); // dispatch events
   const [skill, setSkill] = useState(props.skill);
+  const [skillNames, setSkillNames] = useState([]);
+
+  useEffect(() => {
+    let tab = [];
+    // transform option array into string array and set to state
+    props.skills.map((opt) => {
+      tab.push(opt.name);
+    });
+    setSkillNames(tab);
+  }, []);
+
+  const skillOptions = [
+    { value: "Microsoft Office", label: "Microsoft Office" },
+    { value: "Management", label: "Management" },
+  ];
+
+  const skillValues = skillOptions.filter(
+    (sk) => !skillNames.includes(sk.value)
+  );
 
   const handleCreateSkill = (e) => {
     e.stopPropagation();
-    console.log(skill);
 
-    try {
-      dispatch(addSkill(skill, props.user_id));
-      props.setSkills((skills) => [...skills, skill]);
-    } catch (error) {
-      console.log(error);
-    }
+    if (skill.name != null && skill.level != null)
+      try {
+        dispatch(addSkill(skill, props.user_id));
+        props.setSkills((skills) => [...skills, skill]);
+      } catch (error) {
+        console.log(error);
+      }
+    else
+      toast.error("Données invalides", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+
     props.closeOpenModal(false);
   };
 
@@ -50,7 +79,7 @@ export default function ModalSkill(props) {
         }}
       />
       <div className="centered">
-        <div className="modal modal-md">
+        <div className="modal modal-sm">
           <div className="modal-header">
             <h5 className="heading">Ajouter une compétence</h5>
           </div>
@@ -72,6 +101,7 @@ export default function ModalSkill(props) {
                     <label htmlFor="name" className="form-label">
                       Libellé de la compétence
                     </label>
+                    {skill !== null && skill._id !== undefined ? (
                     <input
                       type="text"
                       className="form-control"
@@ -87,6 +117,18 @@ export default function ModalSkill(props) {
                         });
                       }}
                     />
+                    ) : (
+                      <CreatableSelect
+                        options={skillValues}
+                        placeholder="par ex. Microsoft Office"
+                        onChange={(option) =>
+                          setSkill({
+                            ...skill,
+                            name: option.value,
+                          })
+                        }
+                      />
+                    )}
                   </div>
                 </div>
                 <div className="form-group">

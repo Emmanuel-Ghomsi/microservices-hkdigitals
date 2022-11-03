@@ -54,7 +54,7 @@ export const addHobby = (hobby, user_id) => {
       .post(
         `${APP_URL_RESUME}/create-hobby`,
         {
-          name: hobby.name,
+          name: hobby,
           user: user_id,
         },
         config

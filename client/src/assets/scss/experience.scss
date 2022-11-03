@@ -9,7 +9,9 @@
   color: #61dafb;
 }
 
-.experiences, .socials, .skills {
+.experiences,
+.socials,
+.skills {
   list-style: none;
   padding-left: 0;
   margin-bottom: 0;
@@ -37,7 +39,8 @@
   }
 }
 
-.socials li, .skills li {
+.socials li,
+.skills li {
   background: $white;
   border: none;
   border-bottom: solid 2px #d0d0d0;
@@ -65,4 +68,11 @@
 
 .text-secondary {
   color: $text-color;
+}
+
+.space {
+  padding: 0.1em 0.5em;
+  border-radius: 0.8em;
+  font-size: 11px;
+  background-color: #eee;
 }

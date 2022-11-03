@@ -68,7 +68,7 @@ export default function ExperienceBlock(props) {
                     ? props.experiences.map((experience, index) => {
                         return (
                           <Draggable
-                            key={experience._id}
+                            key={index}
                             draggableId={experience._id}
                             index={index}
                           >

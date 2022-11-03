@@ -7,6 +7,9 @@ import {
   editFormation,
 } from "../../../../store/actions/formationActions";
 
+// Toastify for popup informations
+import { toast } from "react-toastify";
+
 import "../../../../assets/scss/modal.scss";
 
 export default function ModalFormation(props) {
@@ -16,12 +19,24 @@ export default function ModalFormation(props) {
   const handleCreateFormation = (e) => {
     e.stopPropagation();
 
-    try {
-      dispatch(addFormation(createFormation, props.user_id));
-      props.setFormations((formations) => [...formations, createFormation]);
-    } catch (error) {
-      console.log(error);
-    }
+    if (
+      createFormation.degree != null &&
+      createFormation.establishment != null &&
+      createFormation.start_date != null &&
+      createFormation.address != null &&
+      createFormation.description != null
+    )
+      try {
+        dispatch(addFormation(createFormation, props.user_id));
+        props.setFormations((formations) => [...formations, createFormation]);
+      } catch (error) {
+        console.log(error);
+      }
+    else
+      toast.error("Données invalides", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+
     props.closeOpenModal(false);
   };
 
@@ -231,8 +246,7 @@ export default function ModalFormation(props) {
 
           <div className="modal-actions">
             <div className="actions-container">
-              {createFormation !== null &&
-              createFormation._id !== undefined ? (
+              {createFormation !== null && createFormation._id !== undefined ? (
                 <button
                   className="btn btn-primary"
                   onClick={handleEditFormation}
