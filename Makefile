@@ -1,25 +1,25 @@
 .SILENT:
 
-.PHONY: install copy-env-gateway copy-env-users copy-env-resume copy-env-image copy-env-client run
+.PHONY: install
 
-install: .env ## Copie le fichier .env.example et le renomme en .env à la racine du projet
+.env: .env.example ## Copie le fichier .env.example et le renomme en .env à la racine du projet
 	cp .env.example .env
 
-copy-env-gateway: ./gateway/.env
+./gateway/.env: ./gateway/.env.example
 	cp ./gateway/.env.example ./gateway/.env
 
-copy-env-users: ./users/.env
+./users/.env: ./users/.env.example
 	cp ./users/.env.example ./users/.env
 
-copy-env-resume: ./resume/.env
+./resume/.env: ./resume/.env.example
 	cp ./resume/.env.example ./resume/.env
 
-copy-env-image: ./image/.env
+./image/.env: ./image/.env.example
 	cp ./image/.env.example ./image/.env
 
-copy-env-client: ./client/.env
+./client/.env: ./client/.env.example
 	cp ./client/.env.example ./client/.env
 
-run: install copy-env-gateway copy-env-users copy-env-resume copy-env-image copy-env-client ## Créé le container et rebuild au besoin les images ayant été modifiées
+install: .env ./gateway/.env ./users/.env ./resume/.env ./image/.env ./client/.env ## Créé le container et rebuild au besoin les images ayant été modifiées
 	echo "run docker microservice"
 	docker-compose up --build
