@@ -27,7 +27,9 @@ module.exports = (app) => {
       });
       return res.json(data);
     } catch (err) {
-      res.status(err.statusCode).json({ error: err.name });
+      res
+        .status(err.statusCode)
+        .json({ error: err.name });
     }
   });
 
@@ -57,7 +59,9 @@ module.exports = (app) => {
       });
       return res.json(data);
     } catch (err) {
-      res.status(err.statusCode).json({ error: err.name });
+      res
+        .status(err.statusCode)
+        .json({ error: err.name });
     }
   });
 
@@ -68,7 +72,9 @@ module.exports = (app) => {
       const { data } = await ExperienceDeleteService.destroy(_id);
       return res.json(data);
     } catch (err) {
-      res.status(err.statusCode).json({ error: err.name });
+      res
+        .status(err.statusCode)
+        .json({ error: err.name });
     }
   });
 
@@ -78,7 +84,9 @@ module.exports = (app) => {
       const { data } = await ExperienceGetService.getByUserId(_id);
       return res.status(200).json(data);
     } catch (err) {
-      res.status(err.statusCode).json({ error: err.name });
+      res
+        .status(err.statusCode)
+        .json({ error: err.name });
     }
   });
 };
