@@ -160,6 +160,8 @@ export default function Dashboard() {
       if (avatar._id == undefined) dispatch(addImage(avatarFinal, user._id));
       else dispatch(editImage(avatar._id, avatarFinal, user._id));
     }
+    // reset avatar final
+    setAvatarFinal(null)
 
     const data = {
       formations: formations,
