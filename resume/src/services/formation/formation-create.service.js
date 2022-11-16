@@ -8,7 +8,7 @@ class FormationCreate {
     const { degree, establishment, start_date, address, end_date, description, user } =
       formationInputs;
 
-    if (!degree || !establishment || !start_date || !address || !description || !user)
+    if (!degree || !establishment || !start_date || !address || !user)
       throw new ValidationError("Empty require field");
 
     try {

@@ -22,7 +22,6 @@ class FormationEdit {
       !establishment ||
       !start_date ||
       !address ||
-      !description ||
       !user
     )
       throw new ValidationError("Empty require field");

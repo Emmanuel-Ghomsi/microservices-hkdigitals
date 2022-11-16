@@ -23,8 +23,7 @@ export default function ModalFormation(props) {
       createFormation.degree != null &&
       createFormation.establishment != null &&
       createFormation.start_date != null &&
-      createFormation.address != null &&
-      createFormation.description != null
+      createFormation.address != null
     )
       try {
         dispatch(addFormation(createFormation, props.user_id));
@@ -143,7 +142,7 @@ export default function ModalFormation(props) {
                       <label className="form-label">Début / Fin</label>
                       <div className="d-flex justify-content-between">
                         <input
-                          type="date"
+                          type="month"
                           className="form-control"
                           id="start_date"
                           name="start_date"
@@ -163,7 +162,7 @@ export default function ModalFormation(props) {
                           }}
                         />
                         <input
-                          type="date"
+                          type="month"
                           className="form-control"
                           id="end_date"
                           name="end_date"

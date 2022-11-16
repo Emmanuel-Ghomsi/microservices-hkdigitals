@@ -151,7 +151,7 @@ export default function ModalExperience(props) {
                       <label className="form-label">Début / Fin</label>
                       <div className="d-flex justify-content-between">
                         <input
-                          type="date"
+                          type="month"
                           className="form-control"
                           id="start_date"
                           name="start_date"
@@ -171,7 +171,7 @@ export default function ModalExperience(props) {
                           }}
                         />
                         <input
-                          type="date"
+                          type="month"
                           className="form-control"
                           id="end_date"
                           name="end_date"

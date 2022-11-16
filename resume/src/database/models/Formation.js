@@ -12,7 +12,10 @@ const FormationSchema = new Schema(
       type: Date,
       default: null,
     },
-    description: String,
+    description: {
+      type: String,
+      default: null,
+    },
     address: String,
     resume: {
       type: Schema.Types.ObjectId,
