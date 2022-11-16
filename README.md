@@ -54,4 +54,4 @@ Use the [GitHub Issues](https://github.com/Emmanuel-Ghomsi/microservices-hkdigit
 
 Reactive Resume is packaged and distributed using the [MIT License](https://choosealicense.com/licenses/mit/) which allows for commercial use, distribution, modification and private use provided that all copies of the software contain the same license and copyright.
 
-_By Emmanuel GHOMSI GHOMSI, for the Hkdigitals._
+_By Emmanuel GHOMSI GHOMSI, for Hkdigitals._
