@@ -11,6 +11,11 @@
   overflow-x: hidden;
   overflow-y: scroll;
 
+  p {
+    width: 100%;
+    word-wrap: break-word;
+  }
+
   .left-content {
     display: flex;
     flex-direction: column;
