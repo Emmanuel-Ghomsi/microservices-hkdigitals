@@ -16,17 +16,7 @@ class ResumeEdit {
       user,
     } = resumeInputs;
 
-    if (
-      !id ||
-      !formations ||
-      !experiences ||
-      !skills ||
-      !hobbies ||
-      !languages ||
-      !summary ||
-      !user
-    )
-      throw new ValidationError("Empty require field");
+    if (!id || !user) throw new ValidationError("Empty require field");
 
     try {
       const resume = await ResumeRepository.FindResumeByIdAndUpdate(id, {

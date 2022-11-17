@@ -20,6 +20,7 @@ We find modules such as the creation of curriculum vitae, a cms (content managem
   - [Contributing](#contributing)
   - [Report Bugs and Feature Requests](#report-bugs-and-feature-requests)
   - [Infrastructure](#infrastructure)
+  - [Launch](#launch)
   - [License](#license)
 
 ## Features
@@ -49,6 +50,12 @@ Use the [GitHub Issues](https://github.com/Emmanuel-Ghomsi/microservices-hkdigit
 - [ExpressJS](https://expressjs.com/), backend
 - [MongoDB](https://mongodb.com/), database
 - [Hostinger](https://www.hostinger.fr/), infrastructure provider
+
+## Launch
+- `cd microservices-hkdigitals`
+- `make install`, launch the make command to install and configure microservices
+- `docker exec -it microservices-hkdigitals_mongo_1 mongosh`, connect to the mongodb database
+- créer l'utilisateur administrateur
 
 ## License
 

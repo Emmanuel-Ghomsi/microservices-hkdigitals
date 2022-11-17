@@ -15,16 +15,7 @@ class ResumeCreate {
       user,
     } = resumeInputs;
 
-    if (
-      formations.length === 0 ||
-      experiences.length === 0 ||
-      skills.length === 0 ||
-      hobbies.length === 0 ||
-      languages.length === 0 ||
-      !summary ||
-      !user
-    )
-      throw new ValidationError("Empty require field");
+    if (!user) throw new ValidationError("Empty require field");
 
     try {
       const resume = await ResumeRepository.CreateResume({
