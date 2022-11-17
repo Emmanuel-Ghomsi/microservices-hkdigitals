@@ -4,17 +4,6 @@ const ImageCreateService = require("../../services/image/image-create.service");
 const ImageGetService = require("../../services/image/image-get-all.service");
 const UserAuth = require("../middlewares/auth");
 
-// multer middleware
-const multer = require("multer");
-const storage = multer.memoryStorage();
-const uploads = multer({ storage })
-
-// sharp service
-const imageUpload = require("../../services/image/image-resize.service");
-
-// env port
-const { PORT } = require("../../config");
-
 module.exports = (app) => {
   app.post("/create-image", UserAuth, async (req, res, next) => {
     try {
@@ -72,11 +61,4 @@ module.exports = (app) => {
       }
     }
   );
-
-  app.post("/upload-image", uploads.single("avatar"), async (req, res) => {
-    let imageName = await imageUpload(req);
-    return res
-      .status(201)
-      .json({ url: `http://localhost:${PORT}/uploads/` + imageName });
-  });
 };
