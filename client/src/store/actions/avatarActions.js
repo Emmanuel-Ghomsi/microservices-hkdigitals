@@ -46,23 +46,25 @@ export const addImage = (imageObject, id) => {
     // Send to cloudinary
     const imgData = new FormData();
     imgData.append("file", imageObject.file);
-    imgData.append("upload_preset", "emmanuel");
+    imgData.append("upload_preset", "emmanuel"); // use this to send image to cloudinary server
 
     // Make headers configurations
     const config = {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`
       },
     };
 
     axios
-      .post("https://api.cloudinary.com/v1_1/emmanuelsan/image/upload", imgData)
+    .post("https://api.cloudinary.com/v1_1/emmanuelsan/image/upload", imgData)
+      //.post(`${APP_URL_IMAGE}/upload-image`, {avatar: imageObject.file.name})
       .then((res) => {
         axios
           .post(
             `${APP_URL_IMAGE}/create-image`,
             {
               url: res.data.secure_url,
+              //url: res.data.url,
               imageable_type: imageObject.type,
               imageable_id: id,
             },
@@ -100,25 +102,27 @@ export const editImage = (imageId, imageObject, id) => {
     const token = getState().auth.token; // get the token from store state
 
     // Send to cloudinary
-    const imgData = new FormData();
+    let imgData = new FormData();
     imgData.append("file", imageObject.file);
     imgData.append("upload_preset", "emmanuel");
 
     // Make headers configurations
     const config = {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`
       },
     };
 
     axios
       .post("https://api.cloudinary.com/v1_1/emmanuelsan/image/upload", imgData)
+      //.post(`${APP_URL_IMAGE}/upload-image`, imgData)
       .then((res) => {
         axios
           .post(
             `${APP_URL_IMAGE}/edit-image/${imageId}`,
             {
               url: res.data.secure_url,
+              //url: res.data.url,
               imageable_type: imageObject.type,
               imageable_id: id,
             },

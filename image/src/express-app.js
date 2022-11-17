@@ -13,6 +13,7 @@ module.exports = async (app) => {
   app.use(express.urlencoded({ extended: true, limit: "1mb" }));
   app.use(cors());
   app.use(express.static(__dirname + "/public"));
+  app.use("/uploads", express.static("uploads"));
 
   // load swagger definition
   await swaggerDefinition(app);
