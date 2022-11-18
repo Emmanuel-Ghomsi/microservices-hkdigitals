@@ -22,4 +22,6 @@
 
 install: .env ./gateway/.env ./users/.env ./resume/.env ./image/.env ./client/.env ## Créé le container et rebuild au besoin les images ayant été modifiées
 	echo "run docker microservice"
-	docker-compose up --build -d
+	docker-compose down
+	docker-compose build
+	docker-compose up -d
